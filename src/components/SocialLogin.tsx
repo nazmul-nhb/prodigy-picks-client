@@ -8,14 +8,14 @@ import {
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import useSaveUser from "../hooks/useSaveUser";
 
 const SocialLogin = () => {
 	const { googleLogin, facebookLogin } = useAuth();
 	const navigate: NavigateFunction = useNavigate();
 	const location: Location = useLocation();
 	const from: string = location.state?.from?.pathname || "/";
-	const axiosPublic = useAxiosPublic();
+	const saveUser = useSaveUser();
 
 	const handleGoogleLogin = () => {
 		googleLogin()
@@ -23,24 +23,10 @@ const SocialLogin = () => {
 				toast.success("Successfully Logged in!");
 				const user = result.user;
 				const userInfo = {
-					name: user?.displayName,
-					email: user?.email,
+					name: user?.displayName as string,
+					email: user?.email as string,
 				};
-				axiosPublic
-					.post("/users", userInfo)
-					.then((res) => {
-						if (res.data?.success) {
-							toast.success("User Added in Database!");
-						}
-					})
-					.catch((error) => {
-						Swal.fire({
-							title: "Error!",
-							text: error?.message || "Server Error!",
-							icon: "error",
-							confirmButtonText: "Close",
-						});
-					});
+				saveUser(userInfo);
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
@@ -91,24 +77,10 @@ const SocialLogin = () => {
 				toast.success("Successfully Logged in!");
 				const user = result.user;
 				const userInfo = {
-					name: user?.displayName,
-					email: user?.email,
+					name: user?.displayName as string,
+					email: user?.email as string,
 				};
-				axiosPublic
-					.post("/users", userInfo)
-					.then((res) => {
-						if (res.data?.success) {
-							toast.success("User Added in Database!");
-						}
-					})
-					.catch((error) => {
-						Swal.fire({
-							title: "Error!",
-							text: error?.message || "Server Error!",
-							icon: "error",
-							confirmButtonText: "Close",
-						});
-					});
+				saveUser(userInfo);
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
