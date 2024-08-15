@@ -25,16 +25,22 @@ const SocialLogin = () => {
 				const userInfo = {
 					name: user?.displayName,
 					email: user?.email,
-					profile_image: user?.photoURL,
 				};
-				axiosPublic.post("/users", userInfo).then((res) => {
-					if (res.data.insertedId) {
-						toast.success("User Added in Database!");
-					}
-					if (res.data.modifiedCount > 0) {
-						toast.success("Profile Picture Updated!");
-					}
-				});
+				axiosPublic
+					.post("/users", userInfo)
+					.then((res) => {
+						if (res.data?.success) {
+							toast.success("User Added in Database!");
+						}
+					})
+					.catch((error) => {
+						Swal.fire({
+							title: "Error!",
+							text: error?.message || "Server Error!",
+							icon: "error",
+							confirmButtonText: "Close",
+						});
+					});
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
@@ -87,16 +93,22 @@ const SocialLogin = () => {
 				const userInfo = {
 					name: user?.displayName,
 					email: user?.email,
-					profile_image: user?.photoURL,
 				};
-				axiosPublic.post("/users", userInfo).then((res) => {
-					if (res.data.insertedId) {
-						toast.success("User Added in Database!");
-					}
-					if (res.data.modifiedCount > 0) {
-						toast.success("Profile Picture Updated!");
-					}
-				});
+				axiosPublic
+					.post("/users", userInfo)
+					.then((res) => {
+						if (res.data?.success) {
+							toast.success("User Added in Database!");
+						}
+					})
+					.catch((error) => {
+						Swal.fire({
+							title: "Error!",
+							text: error?.message || "Server Error!",
+							icon: "error",
+							confirmButtonText: "Close",
+						});
+					});
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
