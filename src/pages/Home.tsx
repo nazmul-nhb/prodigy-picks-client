@@ -1,11 +1,14 @@
-import React from 'react';
+import React from "react";
+import useAuth from "../hooks/useAuth";
 
 const Home: React.FC = () => {
-    return (
-        <section className='flex justify-center items-center animate-bounce text-3xl font-bold my-8'>
+	const { user } = useAuth();
+	return (
+		<section className="flex justify-center items-center animate-bounce text-3xl font-bold my-8">
             Hello from Home!
-        </section>
-    );
+            {user?.email}
+		</section>
+	);
 };
 
 export default Home;
