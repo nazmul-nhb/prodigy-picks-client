@@ -1,5 +1,10 @@
 import useAuth from "../hooks/useAuth";
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+	Location,
+	NavigateFunction,
+	useLocation,
+	useNavigate,
+} from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
@@ -7,9 +12,9 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const SocialLogin = () => {
 	const { googleLogin, facebookLogin } = useAuth();
-	const navigate = useNavigate();
-	const location = useLocation();
-	const from = location.state?.from?.pathname || "/";
+	const navigate: NavigateFunction = useNavigate();
+	const location: Location = useLocation();
+	const from: string = location.state?.from?.pathname || "/";
 	const axiosPublic = useAxiosPublic();
 
 	const handleGoogleLogin = () => {

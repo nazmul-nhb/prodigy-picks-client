@@ -2,6 +2,7 @@ import { createBrowserRouter, RouteObject } from "react-router-dom";
 import Root from "../layouts/Root";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import PrivateRoute from "./PrivateRoute";
 
 // define route object type
 const routes: RouteObject[] = [
@@ -11,7 +12,12 @@ const routes: RouteObject[] = [
 		children: [
 			{
 				index: true,
-				element: <Home />,
+				element: (
+					<PrivateRoute>
+						{" "}
+						<Home />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "/login",

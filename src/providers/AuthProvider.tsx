@@ -21,12 +21,15 @@ import {
 	User,
 } from "firebase/auth";
 
-interface AuthContextType {
+export interface AuthContextType {
 	user: User | null;
 	setUser: Dispatch<SetStateAction<User | null>>;
 	createUser: ({ email, password }: Credentials) => Promise<UserCredential>;
 	updateUserProfile: (name: string, photo: string) => Promise<void>;
-	loginWithEmail: ({ email, password }: Credentials) => Promise<UserCredential>;
+	loginWithEmail: ({
+		email,
+		password,
+	}: Credentials) => Promise<UserCredential>;
 	googleLogin: () => Promise<UserCredential>;
 	facebookLogin: () => Promise<UserCredential>;
 	logOut: () => Promise<void>;
@@ -97,7 +100,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 		return signOut(auth);
 	};
 
-	// Observer Function
+	// Observer Function for User States
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(
 			auth,
@@ -106,15 +109,22 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 				if (currentUser) {
 					// get token and store in the localStorage
 					const userInfo = { email: currentUser.email };
-					axiosPublic.post("/jwt", userInfo).then((res) => {
-						if (res.data.token) {
-							localStorage.setItem(
-								"prodigy-token",
-								res.data.token
-							);
+					axiosPublic
+						.post("/auth", userInfo)
+						.then((res) => {
+							if (res.data?.token) {
+								// console.log(res.data.token);
+								localStorage.setItem(
+									"prodigy-token",
+									res.data.token
+								);
+								setUserLoading(false);
+							}
+						})
+						.catch((error) => {
+							console.error(error);
 							setUserLoading(false);
-						}
-					});
+						});
 				} else {
 					// remove token if the token stored in the localStorage
 					localStorage.removeItem("prodigy-token");
