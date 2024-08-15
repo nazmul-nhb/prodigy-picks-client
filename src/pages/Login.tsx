@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import SocialLogin from "../components/SocialLogin";
 import useAuth from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Login: React.FC = () => {
+const Login = () => {
 	const { user } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
