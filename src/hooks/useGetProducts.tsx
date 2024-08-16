@@ -35,7 +35,7 @@ interface ProductsResponse {
 
 const useGetProducts = (
 	queryKey: string[],
-	queryParams = ""
+	queryParams: Record<string, string | number> = {}
 ): {
 	productCount: number;
 	totalPages: number;
@@ -46,6 +46,10 @@ const useGetProducts = (
 	refetchProducts: () => void;
 } => {
 	const axiosPublic = useAxiosPublic();
+	 const queryString = new URLSearchParams(
+			queryParams as Record<string, string>
+    ).toString();
+    
 	const {
 		data = {} as ProductsResponse,
 		isLoading: isProductsLoading,
@@ -55,7 +59,7 @@ const useGetProducts = (
 	} = useQuery({
 		queryKey,
 		queryFn: async () => {
-			const res = await axiosPublic.get(`/products?${queryParams}`);
+			const res = await axiosPublic.get(`/products?${queryString}`);
 			return res.data;
 		},
 	});
