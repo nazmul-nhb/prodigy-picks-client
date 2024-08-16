@@ -8,7 +8,7 @@ import { FaSearch } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
 
 const Products: React.FC = () => {
-	const [searchText, setSearchText] = useState("");
+	const [searchText, setSearchText] = useState<string>("");
 	const [selectedBrand, setSelectedBrand] = useState<string>("");
 	const [selectedCategory, setSelectedCategory] = useState<string>("");
 	const [minPrice, setMinPrice] = useState<number | "">("");
@@ -25,11 +25,13 @@ const Products: React.FC = () => {
 		useGetProducts(
 			[
 				"products",
-				currentPage.toString(),
-				itemsPerPage.toString(),
+				currentPage,
+				itemsPerPage,
 				searchText,
 				selectedBrand,
 				selectedCategory,
+				minPrice,
+				maxPrice,
 			],
 			{
 				page: currentPage,
@@ -37,6 +39,8 @@ const Products: React.FC = () => {
 				search: searchText,
 				brand: selectedBrand,
 				category: selectedCategory,
+				minPrice,
+				maxPrice,
 			}
 		);
 
@@ -64,12 +68,14 @@ const Products: React.FC = () => {
 			return toast.error("Cannot Perform Empty Search!");
 		}
 		setSearchText(searchText);
+		setCurrentPage(1);
 	};
 
 	// Clear Search Text after a search
 	const clearSearchText = () => {
 		setSearchText("");
 		if (inputRef.current) inputRef.current.value = "";
+		setCurrentPage(1);
 	};
 
 	const handleItemsPerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -103,9 +109,10 @@ const Products: React.FC = () => {
 							id="brand"
 							name="brand"
 							value={selectedBrand || ""}
-							onChange={(e) =>
-								setSelectedBrand(e.target.value)
-							}
+							onChange={(e) => {
+								setSelectedBrand(e.target.value);
+								setCurrentPage(1);
+							}}
 							className="px-2 rounded-r-lg py-1 bg-transparent border border-prodigy-secondary focus:outline-0"
 						>
 							<option value="">All Brands</option>
@@ -125,9 +132,10 @@ const Products: React.FC = () => {
 							id="category"
 							name="category"
 							value={selectedCategory || ""}
-							onChange={(e) =>
-								setSelectedCategory(e.target.value)
-							}
+							onChange={(e) => {
+								setSelectedCategory(e.target.value);
+								setCurrentPage(1);
+							}}
 							className="px-2 rounded-r-lg py-1 bg-transparent border border-prodigy-secondary focus:outline-0"
 						>
 							<option value="">All Categories</option>
@@ -174,7 +182,8 @@ const Products: React.FC = () => {
 						</label>
 						<input
 							ref={inputRef}
-							defaultValue={searchText}
+							value={searchText}
+							onChange={(e) => setSearchText(e.target.value)}
 							className="px-2 rounded-r-lg py-[9px] bg-transparent w-full border-l border-prodigy-secondary focus:outline-0"
 							placeholder="Search Products"
 							type="text"
@@ -187,16 +196,11 @@ const Products: React.FC = () => {
 									title="Clear Search Field"
 									onClick={clearSearchText}
 									className="text-2xl hover:text-prodigy-primary transition-all duration-500 z-10"
+									type="button"
 								>
 									<MdClear />
 								</button>
 							)}
-							<button
-								className="border py-[9px] px-4 rounded-r-lg font-bold tracking-wider border-prodigy-secondary bg-prodigy-secondary text-white hover:bg-white hover:text-prodigy-secondary transition-all duration-700"
-								type="submit"
-							>
-								Search
-							</button>
 						</div>
 					</div>
 				</form>
@@ -208,56 +212,58 @@ const Products: React.FC = () => {
 							<ProductCard key={product._id} product={product} />
 					  ))}
 			</div>
-			<div className="flex flex-col gap-4 justify-center items-center font-semibold mt-8 lg:mt-16">
-				<p className="text-prodigy-primary">
-					Page: {currentPage} of {totalPages}
-				</p>
-				<div className="flex gap-3">
-					<button
-						className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
-						disabled={currentPage === 1}
-						onClick={handlePreviousPage}
-					>
-						Previous
-					</button>
-
-					{pages.map((page) => (
+			{totalPages > 0 && (
+				<div className="flex flex-col gap-4 justify-center items-center font-semibold mt-8 lg:mt-16">
+					<p className="text-prodigy-primary">
+						Page: {currentPage} of {totalPages}
+					</p>
+					<div className="flex gap-3">
 						<button
-							className={`px-3 border ${
-								currentPage === page + 1
-									? "bg-prodigy-primary border-prodigy-primary text-white hover:bg-transparent hover:text-prodigy-primary"
-									: "text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
-							}`}
-							onClick={() => setCurrentPage(page + 1)}
-							key={page}
+							className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
+							disabled={currentPage === 1}
+							onClick={handlePreviousPage}
 						>
-							{page + 1}
+							Previous
 						</button>
-					))}
 
-					<button
-						className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
-						disabled={
-							currentPage === totalPages || totalPages === 0
-						}
-						onClick={handleNextPage}
+						{pages.map((page) => (
+							<button
+								className={`px-3 border ${
+									currentPage === page + 1
+										? "bg-prodigy-primary border-prodigy-primary text-white hover:bg-transparent hover:text-prodigy-primary"
+										: "text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
+								}`}
+								onClick={() => setCurrentPage(page + 1)}
+								key={page}
+							>
+								{page + 1}
+							</button>
+						))}
+
+						<button
+							className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
+							disabled={
+								currentPage === totalPages || totalPages === 0
+							}
+							onClick={handleNextPage}
+						>
+							Next
+						</button>
+					</div>
+					<select
+						className="border px-2 py-1 focus:text-prodigy-primary outline-prodigy-primary border-prodigy-primary text-prodigy-primary bg-transparent focus:border-2 mx-auto mb-12"
+						value={itemsPerPage}
+						onChange={handleItemsPerPage}
+						name="products"
+						id="products"
 					>
-						Next
-					</button>
+						<option value="2">Products Per Page: 2</option>
+						<option value="6">Products Per Page: 6</option>
+						<option value="8">Products Per Page: 8</option>
+						<option value="16">Products Per Page: 16</option>
+					</select>
 				</div>
-				<select
-					className="border px-2 py-1 focus:text-prodigy-primary outline-prodigy-primary border-prodigy-primary text-prodigy-primary bg-transparent focus:border-2 mx-auto mb-12"
-					value={itemsPerPage}
-					onChange={handleItemsPerPage}
-					name="products"
-					id="products"
-				>
-					<option value="2">Products Per Page: 2</option>
-					<option value="6">Products Per Page: 6</option>
-					<option value="8">Products Per Page: 8</option>
-					<option value="16">Products Per Page: 16</option>
-				</select>
-			</div>
+			)}
 		</section>
 	);
 };

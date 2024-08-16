@@ -5,7 +5,7 @@ import useAxiosPublic from "./useAxiosPublic";
  * Interface for a product object.
  */
 interface Product {
-    _id: string;
+	_id: string;
 	title: string;
 	image: string;
 	description: string;
@@ -34,7 +34,7 @@ interface ProductsResponse {
  */
 
 const useGetProducts = (
-	queryKey: string[],
+	queryKey: (string | number)[],
 	queryParams: Record<string, string | number> = {}
 ): {
 	productCount: number;
@@ -46,10 +46,10 @@ const useGetProducts = (
 	refetchProducts: () => void;
 } => {
 	const axiosPublic = useAxiosPublic();
-	 const queryString = new URLSearchParams(
-			queryParams as Record<string, string>
-    ).toString();
-    
+	const queryString = new URLSearchParams(
+		queryParams as Record<string, string>
+	).toString();
+
 	const {
 		data = {} as ProductsResponse,
 		isLoading: isProductsLoading,
