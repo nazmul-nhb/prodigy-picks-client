@@ -34,7 +34,7 @@ interface ProductsResponse {
  */
 
 const useGetProducts = (
-	queryKey: (string | number)[],
+	queryKey: (string | number)[] = ["products"],
 	queryParams: Record<string, string | number> = {}
 ): {
 	productCount: number;

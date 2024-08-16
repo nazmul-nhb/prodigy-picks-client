@@ -13,7 +13,7 @@ const Products: React.FC = () => {
 	const [selectedCategory, setSelectedCategory] = useState<string>("");
 	const [minPrice, setMinPrice] = useState<number | "">("");
 	const [maxPrice, setMaxPrice] = useState<number | "">("");
-	const [itemsPerPage, setItemsPerPage] = useState(4);
+	const [itemsPerPage, setItemsPerPage] = useState(2);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const inputRef = useRef<HTMLInputElement | null>(null);
@@ -67,7 +67,7 @@ const Products: React.FC = () => {
 		if (searchText.trim() === "") {
 			return toast.error("Cannot Perform Empty Search!");
 		}
-		setSearchText(searchText);
+		setSearchText(searchText.trim());
 		setCurrentPage(1);
 	};
 
@@ -78,10 +78,21 @@ const Products: React.FC = () => {
 		setCurrentPage(1);
 	};
 
+	// Show Toast with Search Result Count
+	// useEffect(() => {
+	// 	if ((searchText || minPrice || maxPrice) && productCount > 0) {
+	// 		toast.success(
+	// 			`${productCount} ${
+	// 				productCount > 1 ? "Matches" : "Match"
+	// 			} Found!`
+	// 		);
+	// 	}
+	// }, [maxPrice, minPrice, productCount, products, searchText]);
+
 	const handleItemsPerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const pageValue = parseInt(e.target.value);
 		setItemsPerPage(pageValue);
-		setCurrentPage(1); // Reset to first page when items per page changes
+		setCurrentPage(1);
 	};
 
 	const handlePreviousPage = () => {
@@ -96,10 +107,17 @@ const Products: React.FC = () => {
 		}
 	};
 
+	// useEffect(() => {
+	//     if (totalPages === 0) {
+	//         setCurrentPage(0);
+	//     }
+	// }, [totalPages]);
+
 	return (
 		<section>
 			{/* <SectionHeader heading={`Total ${productCount} Products`} /> */}
-			{`Total ${productCount} Products`}
+            {/* {`Total ${productCount} Products`} */}
+            {/* Filter & Search Options */}
 			<div className="grid md:grid-cols-2 lg:grid-cols-4 mx-auto gap-4 mb-8 text-sm">
 				{/* Filter by Brand */}
 				<div className="flex flex-col gap-3">
@@ -204,13 +222,37 @@ const Products: React.FC = () => {
 						</div>
 					</div>
 				</form>
-			</div>
-			<div className="grid lg:grid-cols-2 gap-6">
-				{isProductsLoading
-					? "Loading..."
-					: products?.map((product) => (
-							<ProductCard key={product._id} product={product} />
-					  ))}
+            </div>
+            {/* Show Product Cards */}
+			<div className="">
+				{isProductsLoading ? (
+					"Loading..."
+				) : products.length === 0 ? (
+					"No products found."
+				) : (
+					<>
+						{(searchText.trim() ||
+							minPrice ||
+							maxPrice ||
+							selectedBrand ||
+							selectedCategory) &&
+							productCount > 0 && (
+								<div className="flex items-center justify-center">
+									{`${productCount} ${
+										productCount > 1 ? "Matches" : "Match"
+									} Found!`}
+								</div>
+							)}
+						<div className="grid lg:grid-cols-2 gap-6">
+							{products?.map((product) => (
+								<ProductCard
+									key={product._id}
+									product={product}
+								/>
+							))}
+						</div>
+					</>
+				)}
 			</div>
 			{totalPages > 0 && (
 				<div className="flex flex-col gap-4 justify-center items-center font-semibold mt-8 lg:mt-16">

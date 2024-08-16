@@ -8,8 +8,7 @@ import useAuth from "../hooks/useAuth";
 import { ImProfile } from "react-icons/im";
 import { FaUserLock } from "react-icons/fa6";
 import { GiExitDoor } from "react-icons/gi";
-import { PiArticleMediumBold } from "react-icons/pi";
-import { TiInfoLargeOutline } from "react-icons/ti";
+import { TiInfoLargeOutline, TiShoppingCart } from "react-icons/ti";
 // import useUserRole from "../hooks/useUserRole";
 // import logo from "../assets/logo.png";
 
@@ -66,7 +65,7 @@ const Navbar = () => {
 			{user && (
 				<>
 					<NavLink className={navClasses} to={"cart"}>
-						<PiArticleMediumBold />
+						<TiShoppingCart />
 						My Cart
 					</NavLink>
 					{/* {role === "admin" && (
