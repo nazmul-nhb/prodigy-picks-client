@@ -41,7 +41,7 @@ interface AuthProviderProps {
 	children: ReactNode;
 }
 
-interface Credentials {
+export interface Credentials {
 	email: string;
 	password: string;
 }
