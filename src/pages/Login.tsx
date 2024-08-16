@@ -58,6 +58,7 @@ const Login = () => {
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
+				console.error("Login Error: ", error);
 				if (
 					error.message ===
 					"Firebase: Error (auth/invalid-credential)."
@@ -97,9 +98,10 @@ const Login = () => {
 			<h2 className="text-2xl md:text-4xl font-semibold text-center mb-8 font-kreonSerif">
 				Please, Login
 			</h2>
-			<div className="flex-1 flex flex-col items-center gap-2 w-full lg:w-1/2">
+			<div className="flex-1 flex flex-col items-center gap-2 w-full sm:w-3/4 md:w-3/5 lg:w-2/5">
 				{/* Social Media Login */}
 				<SocialLogin />
+				{/* Divider */}
 				<div className="flex items-center w-full my-4">
 					<hr className="w-full dark:text-gray-600" />
 					<p className="px-3 dark:text-gray-600">OR</p>
@@ -108,13 +110,13 @@ const Login = () => {
 				{/* Email Password Login */}
 				<form
 					onSubmit={handleSubmit(handleLogin)}
-					className="w-full flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-primary border border-nexus-secondary rounded-md"
+					className="w-full flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-prodigy-primary border border-prodigy-secondary rounded-md"
 				>
-					<h2 className="text-xl md:text-2xl font-medium font-kreonSerif">
+					<h2 className="text-xl md:text-2xl font-medium font-kreonSerif text-center">
 						Login with Email & Password
 					</h2>
 					<div className="flex flex-col gap-3">
-						<div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-secondary">
+						<div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-prodigy-secondary">
 							<label htmlFor="email">
 								<MdEmail />
 							</label>
@@ -125,22 +127,17 @@ const Login = () => {
 										message: "Provide your email address.",
 									},
 								})}
-								className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-secondary focus:outline-0"
+								className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-prodigy-secondary focus:outline-0"
 								type="email"
 								name="email"
 								id="email"
 								placeholder="Your Email"
 							/>
 						</div>
-						{errors.email && (
-							<p className="text-red-700">
-								{errors.email.message as string}
-							</p>
-						)}
 					</div>
 
 					<div className="flex flex-col gap-3">
-						<div className="flex items-center gap-2 bg-transparent  pl-2 rounded-lg border border-nexus-secondary">
+						<div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-prodigy-secondary">
 							<label htmlFor="password">
 								<RiLockPasswordFill />
 							</label>
@@ -153,7 +150,7 @@ const Login = () => {
 												"Provide a valid password.",
 										},
 									})}
-									className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-secondary focus:outline-0"
+									className="px-2 pr-8 rounded-r-lg py-1 bg-transparent w-full border-l border-prodigy-secondary focus:outline-0"
 									type={showPassword ? "text" : "password"}
 									name="password"
 									id="password"
@@ -169,23 +166,18 @@ const Login = () => {
 								</span>
 							</div>
 						</div>
-						{errors.password && (
-							<p className="text-red-700">
-								{errors.password.message as string}
-							</p>
-						)}
 					</div>
 
 					<button
 						type="submit"
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700 transition-all duration-500"
 					>
 						{userLoading ? "Loading..." : "Login!"}
 					</button>
 					<p className="text-center text-sm md:text-base font-medium">
 						New to this site?{" "}
 						<Link
-							className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-nexus-secondary transition-all duration-500"
+							className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-prodigy-secondary transition-all duration-500"
 							to={"/register"}
 						>
 							Register Here!

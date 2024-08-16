@@ -30,6 +30,7 @@ const SocialLogin = () => {
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
+				console.error("Login Error: ", error);
 				if (
 					error.message ===
 					"Firebase: Error (auth/popup-closed-by-user)."
@@ -84,6 +85,7 @@ const SocialLogin = () => {
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
+				console.error("Login Error: ", error);
 				if (
 					error.message ===
 					"Firebase: Error (auth/popup-closed-by-user)."
@@ -135,7 +137,7 @@ const SocialLogin = () => {
 					onClick={handleGoogleLogin}
 					aria-label="Login with Google"
 					type="button"
-					className="flex items-center justify-center w-full px-2 py-1 gap-2 border rounded-md border-[#dc3c2a] bg-[#dc3c2a] text-[#fff] hover:text-[#dc3c2a] hover:bg-transparent transition-all duration-500"
+					className="flex items-center justify-center w-full p-2 gap-2 border rounded-md border-[#dc3c2a] bg-[#dc3c2a] text-[#fff] hover:text-[#dc3c2a] hover:bg-transparent transition-all duration-500"
 				>
 					<FaGoogle />
 					<p>Google</p>
@@ -145,7 +147,7 @@ const SocialLogin = () => {
 					onClick={handleFacebookLogin}
 					aria-label="Login with Facebook"
 					role="button"
-					className="flex items-center justify-center w-full px-2 py-1 gap-2 border rounded-md border-[#0866ff] bg-[#0866ff] text-[#fff] hover:text-[#0866ff] hover:bg-transparent transition-all duration-500"
+					className="flex items-center justify-center w-full p-2 gap-2 border rounded-md border-[#0866ff] bg-[#0866ff] text-[#fff] hover:text-[#0866ff] hover:bg-transparent transition-all duration-500"
 				>
 					<FaFacebook />
 					<p>Facebook</p>
