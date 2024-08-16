@@ -9,22 +9,22 @@ interface UserInfo {
 	email: string;
 }
 
+/**
+ * Saves user information to the database.
+ *
+ * @param {UserInfo} userInfo - The user information to save.
+ * @param {string} userInfo.name - The name of the user.
+ * @param {string} userInfo.email - The email address of the user.
+ *
+ * @returns {Promise<void>} - A promise that resolves when the user info is saved.
+ *
+ * @example
+ * const saveUser = useSaveUser();
+ * saveUser({ name: "John Doe", email: "john@example.com" });
+ */
+
 const useSaveUser = () => {
 	const axiosPublic = useAxiosPublic();
-
-	/**
-	 * Saves user information to the database.
-	 *
-	 * @param {UserInfo} userInfo - The user information to save.
-	 * @param {string} userInfo.name - The name of the user.
-	 * @param {string} userInfo.email - The email address of the user.
-	 *
-	 * @returns {Promise<void>} - A promise that resolves when the user info is saved.
-	 *
-	 * @example
-	 * const saveUser = useSaveUser();
-	 * saveUser({ name: "John Doe", email: "john@example.com" });
-	 */
 
 	const saveUser = useCallback(
 		async (userInfo: UserInfo) => {
