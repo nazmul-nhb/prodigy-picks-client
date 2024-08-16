@@ -13,6 +13,7 @@ const Products: React.FC = () => {
 	const [selectedCategory, setSelectedCategory] = useState<string>("");
 	const [minPrice, setMinPrice] = useState<number | "">("");
 	const [maxPrice, setMaxPrice] = useState<number | "">("");
+	const [sortBy, setSortBy] = useState<string>("");
 	const [itemsPerPage, setItemsPerPage] = useState(2);
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -32,6 +33,7 @@ const Products: React.FC = () => {
 				selectedCategory,
 				minPrice,
 				maxPrice,
+				sortBy,
 			],
 			{
 				page: currentPage,
@@ -41,6 +43,7 @@ const Products: React.FC = () => {
 				category: selectedCategory,
 				minPrice,
 				maxPrice,
+				sort: sortBy,
 			}
 		);
 
@@ -78,17 +81,6 @@ const Products: React.FC = () => {
 		setCurrentPage(1);
 	};
 
-	// Show Toast with Search Result Count
-	// useEffect(() => {
-	// 	if ((searchText || minPrice || maxPrice) && productCount > 0) {
-	// 		toast.success(
-	// 			`${productCount} ${
-	// 				productCount > 1 ? "Matches" : "Match"
-	// 			} Found!`
-	// 		);
-	// 	}
-	// }, [maxPrice, minPrice, productCount, products, searchText]);
-
 	const handleItemsPerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const pageValue = parseInt(e.target.value);
 		setItemsPerPage(pageValue);
@@ -107,94 +99,101 @@ const Products: React.FC = () => {
 		}
 	};
 
-	// useEffect(() => {
-	//     if (totalPages === 0) {
-	//         setCurrentPage(0);
-	//     }
-	// }, [totalPages]);
-
 	return (
 		<section>
 			{/* <SectionHeader heading={`Total ${productCount} Products`} /> */}
-            {/* {`Total ${productCount} Products`} */}
-            {/* Filter & Search Options */}
-			<div className="grid md:grid-cols-2 lg:grid-cols-4 mx-auto gap-4 mb-8 text-sm">
+			{/* {`Total ${productCount} Products`} */}
+			{/* Filter & Search Options */}
+			<div className="w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mx-auto gap-4 mb-8 text-sm">
 				{/* Filter by Brand */}
-				<div className="flex flex-col gap-3">
-					<div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-prodigy-secondary">
-						<label htmlFor="brand">Brand</label>
-						<select
-							id="brand"
-							name="brand"
-							value={selectedBrand || ""}
-							onChange={(e) => {
-								setSelectedBrand(e.target.value);
-								setCurrentPage(1);
-							}}
-							className="px-2 rounded-r-lg py-1 bg-transparent border border-prodigy-secondary focus:outline-0"
-						>
-							<option value="">All Brands</option>
-							{brands.map((brand: string) => (
-								<option key={brand} value={brand}>
-									{brand}
-								</option>
-							))}
-						</select>
-					</div>
+				<div className="flex gap-2 w-full items-center relative bg-transparent rounded-lg border border-prodigy-secondary">
+					<select
+						id="brand"
+						name="brand"
+						value={selectedBrand || ""}
+						onChange={(e) => {
+							setSelectedBrand(e.target.value);
+							setCurrentPage(1);
+						}}
+						className="redesign px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
+					>
+						<option value="">All Brands</option>
+						{brands.map((brand: string) => (
+							<option key={brand} value={brand}>
+								{brand}
+							</option>
+						))}
+					</select>
 				</div>
+
 				{/* Filter by Category */}
-				<div className="flex flex-col gap-3">
-					<div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-prodigy-secondary">
-						<label htmlFor="category">Category</label>
-						<select
-							id="category"
-							name="category"
-							value={selectedCategory || ""}
-							onChange={(e) => {
-								setSelectedCategory(e.target.value);
-								setCurrentPage(1);
-							}}
-							className="px-2 rounded-r-lg py-1 bg-transparent border border-prodigy-secondary focus:outline-0"
-						>
-							<option value="">All Categories</option>
-							{categories.map((category: string) => (
-								<option key={category} value={category}>
-									{category}
-								</option>
-							))}
-						</select>
-					</div>
+				<div className="flex gap-2 w-full items-center relative bg-transparent rounded-lg border border-prodigy-secondary">
+					<select
+						id="category"
+						name="category"
+						value={selectedCategory || ""}
+						onChange={(e) => {
+							setSelectedCategory(e.target.value);
+							setCurrentPage(1);
+						}}
+						className="redesign px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
+					>
+						<option value="">All Categories</option>
+						{categories.map((category: string) => (
+							<option key={category} value={category}>
+								{category}
+							</option>
+						))}
+					</select>
 				</div>
+
 				{/* Price Range */}
-				<div className="flex flex-col gap-3">
-					<label htmlFor="priceRange">Price Range</label>
-					<div className="flex gap-2">
-						<input
-							type="number"
-							value={minPrice || ""}
-							onChange={(e) =>
-								setMinPrice(Number(e.target.value) || "")
-							}
-							placeholder="Min Price"
-							className="border px-2 py-1 rounded-lg border-prodigy-secondary focus:outline-0"
-						/>
-						<input
-							type="number"
-							value={maxPrice || ""}
-							onChange={(e) =>
-								setMaxPrice(Number(e.target.value) || "")
-							}
-							placeholder="Max Price"
-							className="border px-2 py-1 rounded-lg border-prodigy-secondary focus:outline-0"
-						/>
-					</div>
+				<div className="flex gap-2 w-full items-center relative bg-transparent rounded-lg border border-prodigy-secondary">
+					<input
+						type="number"
+						value={minPrice || ""}
+						onChange={(e) =>
+							setMinPrice(Number(e.target.value) || "")
+						}
+						placeholder="Minimum Price"
+						className="px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
+					/>
+					<input
+						type="number"
+						value={maxPrice || ""}
+						onChange={(e) =>
+							setMaxPrice(Number(e.target.value) || "")
+						}
+						placeholder="Maximum Price"
+						className="px-2 rounded-r-lg py-2 bg-transparent w-full border-l border-prodigy-secondary focus:outline-0"
+					/>
 				</div>
+
+				{/* Sort Products */}
+				<div className="flex gap-2 w-full items-center relative bg-transparent rounded-lg border border-prodigy-secondary">
+					<select
+						id="sort"
+						value={sortBy}
+						onChange={(e) => {
+							setSortBy(e.target.value);
+							setCurrentPage(1);
+						}}
+						className="px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
+					>
+						<option value="">Sort Products</option>
+						<option value="date_desc">Newest First</option>
+						<option value="date_asc">Oldest First</option>
+						<option value="price_asc">Price: Low to High</option>
+						<option value="price_desc">Price: High to Low</option>
+					</select>
+				</div>
+
 				{/* Search Products */}
 				<form
 					onSubmit={handleSearchProduct}
-					className="flex gap-2 items-center justify-start text-prodigy-secondary"
+					className="sm:col-span-2 lg:col-span-2 xl:col-span-1 flex gap-2 items-center justify-start text-prodigy-secondary"
 				>
-					<div className="flex gap-2 w-full items-center relative pl-2 bg-transparent rounded-lg border border-prodigy-secondary">
+					<div className="flex gap-2 w-full items-center relative pl-2 pr-6 bg-transparent rounded-lg border border-prodigy-secondary">
 						<label className="font-medium" htmlFor="search">
 							<FaSearch />
 						</label>
@@ -202,7 +201,7 @@ const Products: React.FC = () => {
 							ref={inputRef}
 							value={searchText}
 							onChange={(e) => setSearchText(e.target.value)}
-							className="px-2 rounded-r-lg py-[9px] bg-transparent w-full border-l border-prodigy-secondary focus:outline-0"
+							className="px-2 rounded-r-lg py-2 bg-transparent w-full border-l border-prodigy-secondary focus:outline-0"
 							placeholder="Search Products"
 							type="text"
 							name="search"
@@ -222,8 +221,9 @@ const Products: React.FC = () => {
 						</div>
 					</div>
 				</form>
-            </div>
-            {/* Show Product Cards */}
+			</div>
+
+			{/* Show Product Cards */}
 			<div className="">
 				{isProductsLoading ? (
 					"Loading..."
