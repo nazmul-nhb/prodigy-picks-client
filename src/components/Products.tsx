@@ -193,7 +193,7 @@ const Products: React.FC = () => {
 					onSubmit={handleSearchProduct}
 					className="sm:col-span-2 lg:col-span-2 xl:col-span-1 flex gap-2 items-center justify-start text-prodigy-secondary"
 				>
-					<div className="flex gap-2 w-full items-center relative pl-2 pr-6 bg-transparent rounded-lg border border-prodigy-secondary">
+					<div className="flex gap-2 w-full items-center relative pl-2 pr-8 bg-transparent rounded-lg border border-prodigy-secondary">
 						<label className="font-medium" htmlFor="search">
 							<FaSearch />
 						</label>
@@ -207,7 +207,7 @@ const Products: React.FC = () => {
 							name="search"
 							id="search"
 						/>
-						<div className="absolute right-0 flex gap-2">
+						<div className="absolute right-1 flex gap-2">
 							{searchText !== "" && (
 								<button
 									title="Clear Search Field"

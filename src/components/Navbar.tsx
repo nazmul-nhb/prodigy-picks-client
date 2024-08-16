@@ -95,7 +95,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav className="max-w-[1920px] flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-14 sticky top-0 bg-navBG bg-opacity-100 z-50 text-prodigy-secondary transition-all duration-1000">
+		<nav className="max-w-[1920px] flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-14 sticky top-0 bg-navBG bg-opacity-100 z-50 text-prodigy-secondary transition-all duration-1000 h-16">
 			<div
 				ref={sidebarRef}
 				className="sm:hidden max-[430px]:text-3xl text-5xl cursor-pointer z-50"
