@@ -14,7 +14,7 @@ const Products: React.FC = () => {
 	const [minPrice, setMinPrice] = useState<number | "">("");
 	const [maxPrice, setMaxPrice] = useState<number | "">("");
 	const [sortBy, setSortBy] = useState<string>("");
-	const [itemsPerPage, setItemsPerPage] = useState(2);
+	const [itemsPerPage, setItemsPerPage] = useState(12);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const inputRef = useRef<HTMLInputElement | null>(null);
@@ -102,7 +102,7 @@ const Products: React.FC = () => {
 	return (
 		<section>
 			{/* <SectionHeader heading={`Total ${productCount} Products`} /> */}
-			{/* {`Total ${productCount} Products`} */}
+
 			{/* Filter & Search Options */}
 			<div className="w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mx-auto gap-4 mb-8 text-sm">
 				{/* Filter by Brand */}
@@ -178,7 +178,7 @@ const Products: React.FC = () => {
 							setSortBy(e.target.value);
 							setCurrentPage(1);
 						}}
-						className="px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
+						className="redesign px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
 					>
 						<option value="">Sort Products</option>
 						<option value="date_desc">Newest First</option>
@@ -227,7 +227,7 @@ const Products: React.FC = () => {
 			<div className="">
 				{isProductsLoading ? (
 					"Loading..."
-				) : products.length === 0 ? (
+				) : productCount === 0 ? (
 					"No products found."
 				) : (
 					<>
@@ -243,7 +243,7 @@ const Products: React.FC = () => {
 									} Found!`}
 								</div>
 							)}
-						<div className="grid lg:grid-cols-2 gap-6">
+						<div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-6">
 							{products?.map((product) => (
 								<ProductCard
 									key={product._id}
@@ -254,20 +254,24 @@ const Products: React.FC = () => {
 					</>
 				)}
 			</div>
+
+			{/* Pagination Logic & Styles */}
 			{totalPages > 0 && (
 				<div className="flex flex-col gap-4 justify-center items-center font-semibold mt-8 lg:mt-16">
 					<p className="text-prodigy-primary">
 						Page: {currentPage} of {totalPages}
 					</p>
 					<div className="flex gap-3">
+						{/* Previous Button */}
 						<button
-							className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
+							className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:cursor-not-allowed text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
 							disabled={currentPage === 1}
 							onClick={handlePreviousPage}
 						>
 							Previous
 						</button>
 
+						{/* Numbered Buttons */}
 						{pages.map((page) => (
 							<button
 								className={`px-3 border ${
@@ -282,8 +286,9 @@ const Products: React.FC = () => {
 							</button>
 						))}
 
+						{/* Next Button */}
 						<button
-							className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
+							className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:cursor-not-allowed text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
 							disabled={
 								currentPage === totalPages || totalPages === 0
 							}
@@ -299,10 +304,10 @@ const Products: React.FC = () => {
 						name="products"
 						id="products"
 					>
-						<option value="2">Products Per Page: 2</option>
-						<option value="6">Products Per Page: 6</option>
-						<option value="8">Products Per Page: 8</option>
-						<option value="16">Products Per Page: 16</option>
+						<option value="12">Products Per Page: 12</option>
+						<option value="24">Products Per Page: 24</option>
+						<option value="36">Products Per Page: 36</option>
+						<option value="48">Products Per Page: 48</option>
 					</select>
 				</div>
 			)}
