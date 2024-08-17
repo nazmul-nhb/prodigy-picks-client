@@ -146,7 +146,7 @@ const Register = () => {
 				{/* Email Password Registration */}
 				<form
 					onSubmit={handleSubmit(handleRegister)}
-					className="w-full flex flex-col gap-4 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-prodigy-primary border border-prodigy-primary rounded-md"
+					className="w-full flex flex-col gap-4 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-prodigy-primary rounded-md bg-[#bbd3eb4b]"
 				>
 					<h3 className="text-xl md:text-2xl font-medium font-kreonSerif text-center">
 						Register with Email & Password

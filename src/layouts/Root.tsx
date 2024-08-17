@@ -4,11 +4,13 @@ import Footer from "../components/Footer";
 
 const Root = () => {
 	return (
-		<main>
+		<>
 			<Navbar />
-			<Outlet />
-			<Footer/>
-		</main>
+			<main className="min-h-screen">
+				<Outlet />
+			</main>
+			<Footer />
+		</>
 	);
 };
 
