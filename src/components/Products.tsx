@@ -2,8 +2,6 @@ import React, { useRef, useState } from "react";
 import useGetProducts from "../hooks/useGetProducts";
 import ProductCard from "./ProductCard";
 import toast from "react-hot-toast";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 import { FaSearch } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
 
@@ -19,51 +17,39 @@ const Products: React.FC = () => {
 
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
-	const axiosSecure = useAxiosSecure();
-
 	// Get products data using hook
-	const { productCount, totalPages, products, isProductsLoading } =
-		useGetProducts(
-			[
-				"products",
-				currentPage,
-				itemsPerPage,
-				searchText,
-				selectedBrand,
-				selectedCategory,
-				minPrice,
-				maxPrice,
-				sortBy,
-			],
-			{
-				page: currentPage,
-				size: itemsPerPage,
-				search: searchText,
-				brand: selectedBrand,
-				category: selectedCategory,
-				minPrice,
-				maxPrice,
-				sort: sortBy,
-			}
-		);
+	const {
+		productCount,
+		totalPages,
+		products,
+		brands,
+		categories,
+		isProductsLoading,
+	} = useGetProducts(
+		[
+			"products",
+			currentPage,
+			itemsPerPage,
+			searchText,
+			selectedBrand,
+			selectedCategory,
+			minPrice,
+			maxPrice,
+			sortBy,
+		],
+		{
+			page: currentPage,
+			size: itemsPerPage,
+			search: searchText,
+			brand: selectedBrand,
+			category: selectedCategory,
+			minPrice,
+			maxPrice,
+			sort: sortBy,
+		}
+	);
 
 	const pages = [...Array(totalPages).keys()];
-
-	const { data: categories = [] } = useQuery({
-		queryKey: ["categories"],
-		queryFn: async () => {
-			const res = await axiosSecure("/products/categories");
-			return res.data?.categories;
-		},
-	});
-
-	const { data: brands = [] } = useQuery({
-		queryKey: ["brands"],
-		queryFn: async () => {
-			const res = await axiosSecure("/products/brands");
-			return res.data?.brands;
-		},
-	});
 
 	const handleSearchProduct = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -118,7 +104,7 @@ const Products: React.FC = () => {
 						className="redesign px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
 					>
 						<option value="">All Brands</option>
-						{brands.map((brand: string) => (
+						{brands?.map((brand: string) => (
 							<option key={brand} value={brand}>
 								{brand}
 							</option>
@@ -139,7 +125,7 @@ const Products: React.FC = () => {
 						className="redesign px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
 					>
 						<option value="">All Categories</option>
-						{categories.map((category: string) => (
+						{categories?.map((category: string) => (
 							<option key={category} value={category}>
 								{category}
 							</option>

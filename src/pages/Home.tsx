@@ -3,7 +3,7 @@ import Products from "../components/Products";
 
 const Home = () => {
 	return (
-		<section className="flex justify-center items-center my-8 mx-auto px-8">
+		<section className="flex justify-center items-center py-8 mx-auto px-8">
 			<Helmet>
 				<title>Prodigy Picks : : Eco Essentials</title>
 			</Helmet>

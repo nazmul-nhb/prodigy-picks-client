@@ -12,10 +12,8 @@ const Cart = () => {
 		return { ...products, quantity, cartId: _id };
 	});
 
-	console.log(cartProducts);
-
 	return (
-		<section className="my-8 mx-auto px-8">
+		<section className="py-8 mx-auto px-8">
 			<Helmet>
 				<title>{user?.displayName}'s Cart - Prodigy Picks</title>
 			</Helmet>

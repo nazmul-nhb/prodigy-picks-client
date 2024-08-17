@@ -23,6 +23,8 @@ interface ProductsResponse {
 	productCount: number;
 	totalPages: number;
 	products: Product[];
+	categories: string[];
+	brands: string[];
 }
 
 /**
@@ -40,6 +42,8 @@ const useGetProducts = (
 	productCount: number;
 	totalPages: number;
 	products: Product[];
+	categories: string[];
+	brands: string[];
 	isProductsLoading: boolean;
 	isProductsError: boolean;
 	productsError: unknown;
@@ -63,11 +67,15 @@ const useGetProducts = (
 			return res.data;
 		},
 	});
-	const { productCount, totalPages, products } = data;
+
+	const { productCount, totalPages, products, brands, categories } = data;
+
 	return {
 		productCount,
 		totalPages,
 		products,
+		brands,
+		categories,
 		isProductsLoading,
 		isProductsError,
 		productsError,

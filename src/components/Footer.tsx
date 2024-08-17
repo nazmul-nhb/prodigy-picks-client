@@ -4,7 +4,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 
 const Footer = () => {
 	return (
-		<footer className="bg-prodigy-secondary text-white py-8">
+		<footer className="bg-prodigy-secondary text-white py-8 max-w-[1920px] mx-auto">
 			<div className="container mx-auto px-4">
 				<div className="flex flex-col items-center md:flex-row md:justify-between">
 					{/* Footer Title and Subtitle */}
