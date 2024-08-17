@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import useGetProducts from "../hooks/useGetProducts";
 import ProductCard from "./ProductCard";
 import toast from "react-hot-toast";
-import { FaSearch } from "react-icons/fa";
+import { FaFilter, FaSearch, FaSortAmountDown } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
 
 const Products: React.FC = () => {
@@ -92,7 +92,10 @@ const Products: React.FC = () => {
 			{/* Filter & Search Options */}
 			<div className="w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mx-auto gap-4 mb-8 text-sm">
 				{/* Filter by Brand */}
-				<div className="flex gap-2 w-full items-center relative bg-transparent rounded-lg border border-prodigy-secondary">
+				<div className="flex gap-2 w-full items-center relative pl-2 bg-transparent rounded-lg border border-prodigy-secondary">
+					<label className="font-medium" htmlFor="brand">
+						<FaFilter />
+					</label>
 					<select
 						id="brand"
 						name="brand"
@@ -101,7 +104,7 @@ const Products: React.FC = () => {
 							setSelectedBrand(e.target.value);
 							setCurrentPage(1);
 						}}
-						className="redesign px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
+						className="redesign px-2 rounded-r-lg py-2 border-l bg-transparent w-full border-prodigy-secondary focus:outline-0"
 					>
 						<option value="">All Brands</option>
 						{brands?.map((brand: string) => (
@@ -113,7 +116,10 @@ const Products: React.FC = () => {
 				</div>
 
 				{/* Filter by Category */}
-				<div className="flex gap-2 w-full items-center relative bg-transparent rounded-lg border border-prodigy-secondary">
+				<div className="flex gap-2 w-full items-center relative pl-2 bg-transparent rounded-lg border border-prodigy-secondary">
+					<label className="font-medium" htmlFor="category">
+						<FaFilter />
+					</label>
 					<select
 						id="category"
 						name="category"
@@ -122,7 +128,7 @@ const Products: React.FC = () => {
 							setSelectedCategory(e.target.value);
 							setCurrentPage(1);
 						}}
-						className="redesign px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
+						className="redesign px-2 rounded-r-lg py-2 border-l bg-transparent w-full border-prodigy-secondary focus:outline-0"
 					>
 						<option value="">All Categories</option>
 						{categories?.map((category: string) => (
@@ -141,7 +147,7 @@ const Products: React.FC = () => {
 						onChange={(e) =>
 							setMinPrice(Number(e.target.value) || "")
 						}
-						placeholder="Minimum Price"
+						placeholder="$ Minimum Price"
 						className="px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
 					/>
 					<input
@@ -150,13 +156,16 @@ const Products: React.FC = () => {
 						onChange={(e) =>
 							setMaxPrice(Number(e.target.value) || "")
 						}
-						placeholder="Maximum Price"
+						placeholder="$ Maximum Price"
 						className="px-2 rounded-r-lg py-2 bg-transparent w-full border-l border-prodigy-secondary focus:outline-0"
 					/>
 				</div>
 
 				{/* Sort Products */}
-				<div className="flex gap-2 w-full items-center relative bg-transparent rounded-lg border border-prodigy-secondary">
+				<div className="flex gap-2 w-full items-center relative pl-2 bg-transparent rounded-lg border border-prodigy-secondary">
+					<label className="font-medium" htmlFor="sort">
+						<FaSortAmountDown />
+					</label>
 					<select
 						id="sort"
 						value={sortBy}
@@ -164,7 +173,7 @@ const Products: React.FC = () => {
 							setSortBy(e.target.value);
 							setCurrentPage(1);
 						}}
-						className="redesign px-2 rounded-r-lg py-2 bg-transparent w-full border-prodigy-secondary focus:outline-0"
+						className="redesign px-2 rounded-r-lg py-2 border-l bg-transparent w-full border-prodigy-secondary focus:outline-0"
 					>
 						<option value="">Sort Products</option>
 						<option value="date_desc">Newest First</option>

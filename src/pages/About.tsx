@@ -15,7 +15,7 @@ const About: React.FC = () => {
 			<Helmet>
 				<title>About - Prodigy Picks</title>
 			</Helmet>
-			<h3 className="text-2xl md:text3xl lg:text-4xl font-bold mb-4 hover:text-blue-600 transition-colors duration-300">
+			<h3 className="text-2xl md:text-3xl font-bold mb-4 hover:text-blue-600 transition-all duration-300 text-center">
 				About Us
 			</h3>
 			<p className="text-lg mb-4">
