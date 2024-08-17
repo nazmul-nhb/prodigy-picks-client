@@ -9,28 +9,36 @@ import { SlBadge } from "react-icons/sl";
 import useAuth from "../hooks/useAuth";
 import useAddToCart from "../hooks/useAddToCart";
 import useGetCart from "../hooks/useGetCart";
+import { HiOutlineTrash } from "react-icons/hi2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 interface Product {
 	_id: string;
+	cartId?: string;
 	title: string;
 	image: string;
 	price: number;
 	brand: string;
 	category: string;
 	ratings: number;
+	quantity?: number;
 	createdAt: Date;
 }
 
 interface ProductProps {
 	product: Product;
+	fromCart?: boolean;
 }
 
-const ProductCard: React.FC<ProductProps> = ({ product }) => {
+const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
+	const { user } = useAuth();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isClosing, setIsClosing] = useState(false);
-	const { user } = useAuth();
 	const { refetchCart } = useGetCart();
 	const { addToCart } = useAddToCart();
+	const axiosSecure = useAxiosSecure();
 
 	const handleOpenModal = () => {
 		setIsModalOpen(true);
@@ -46,9 +54,20 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 		}, 300);
 	};
 
-	const { _id, title, image, price, brand, category, ratings, createdAt } =
-		product;
+	const {
+		_id,
+		title,
+		image,
+		price,
+		brand,
+		category,
+		quantity,
+		ratings,
+		createdAt,
+		cartId,
+	} = product;
 
+	// function to add item to cart
 	const handleAddToCart = (id: string) => {
 		const cartItem = {
 			userEmail: user?.email as string,
@@ -56,6 +75,38 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 			quantity: 1,
 		};
 		addToCart(cartItem, refetchCart);
+	};
+
+	// function to remove items from cart
+	const handleRemoveFromCart = (id: string, title: string) => {
+		Swal.fire({
+			title: "Are You Sure?",
+			text: `Remove "${title}" from Your Cart?`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#ff0000",
+			cancelButtonColor: "#2a7947",
+			confirmButtonText: "Yes, Remove It!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				axiosSecure
+					.delete(`/carts/${id}`)
+					.then((res) => {
+						if (res.data?.success) {
+							refetchCart();
+							Swal.fire({
+								title: "Removed!",
+								text: `"${title}" Removed from Your Cart!`,
+								icon: "success",
+							});
+							toast.success(`Item Removed from YOur Cart!`);
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		});
 	};
 
 	return (
@@ -87,6 +138,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 						</p>
 					</div>
 					<h3 className="text-xl font-bold text-gray-800 group-hover:text-nexus-primary">
+						{fromCart && <sup>({quantity}x)</sup>}
 						{title}
 					</h3>
 					<p className="text-sm text-gray-500 flex items-center gap-1">
@@ -96,13 +148,25 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 				</div>
 				{/* Buttons */}
 				<div className="flex gap-2 justify-between mt-2 w-full">
-					<button
-						onClick={() => handleAddToCart(_id)}
-						className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-300 ease-in-out hover:bg-red-600"
-					>
-						<TiShoppingCart />
-						Add to Cart
-					</button>
+					{fromCart ? (
+						<button
+							onClick={() =>
+								handleRemoveFromCart(cartId as string, title)
+							}
+							className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-300 ease-in-out hover:bg-red-600"
+						>
+							<HiOutlineTrash />
+							Remove from Cart
+						</button>
+					) : (
+						<button
+							onClick={() => handleAddToCart(_id)}
+							className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-300 ease-in-out hover:bg-red-600"
+						>
+							<TiShoppingCart />
+							Add to Cart
+						</button>
+					)}
 					<button
 						onClick={handleOpenModal}
 						className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-blue-500 rounded-lg transition duration-300 ease-in-out hover:bg-blue-600"

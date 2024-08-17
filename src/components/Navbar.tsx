@@ -59,17 +59,17 @@ const Navbar = () => {
 
 	const navClasses = ({ isActive }: { isActive: boolean }) =>
 		isActive
-			? "relative text-prodigy-primary font-bold border-b-2 border-prodigy-primary flex items-center gap-0.5"
-			: "relative text-prodigy-secondary hover:text-prodigy-primary font-semibold flex items-center gap-0.5";
+			? "text-prodigy-primary font-bold border-b-2 border-prodigy-primary flex items-center gap-0.5"
+			: "text-prodigy-secondary hover:text-prodigy-primary font-semibold flex items-center gap-0.5";
 
 	const navItems = (
 		<>
 			{user && (
 				<>
 					<NavLink className={navClasses} to={"cart"}>
-						<sup className="text-xs text-red-800 absolute left-1">
+						<p className="text-xs text-red-800">
 							{totalProducts}
-						</sup>
+						</p>
 						<TiShoppingCart />
 						My Cart
 					</NavLink>

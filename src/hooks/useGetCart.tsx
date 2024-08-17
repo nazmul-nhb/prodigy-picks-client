@@ -11,9 +11,8 @@ interface Product {
 	price: number;
 	brand: string;
 	category: string;
-	ratings: number;
-	createdAt: string;
-	__v: number;
+    ratings: number;
+	createdAt: Date;
 }
 
 interface CartItem {

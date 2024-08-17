@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import useGetProducts from "../hooks/useGetProducts";
 import ProductCard from "./ProductCard";
 import toast from "react-hot-toast";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaSearch } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
@@ -19,7 +19,7 @@ const Products: React.FC = () => {
 
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
-	const axiosPublic = useAxiosPublic();
+	const axiosSecure = useAxiosSecure();
 
 	// Get products data using hook
 	const { productCount, totalPages, products, isProductsLoading } =
@@ -52,7 +52,7 @@ const Products: React.FC = () => {
 	const { data: categories = [] } = useQuery({
 		queryKey: ["categories"],
 		queryFn: async () => {
-			const res = await axiosPublic("/products/categories");
+			const res = await axiosSecure("/products/categories");
 			return res.data?.categories;
 		},
 	});
@@ -60,7 +60,7 @@ const Products: React.FC = () => {
 	const { data: brands = [] } = useQuery({
 		queryKey: ["brands"],
 		queryFn: async () => {
-			const res = await axiosPublic("/products/brands");
+			const res = await axiosSecure("/products/brands");
 			return res.data?.brands;
 		},
 	});
