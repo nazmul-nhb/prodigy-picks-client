@@ -90,7 +90,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axiosSecure
-					.delete(`/carts/${id}`)
+					.delete(`/carts/${id}?email=${user?.email}`)
 					.then((res) => {
 						if (res.data?.success) {
 							refetchCart();
