@@ -6,6 +6,8 @@ import { IoIosCloseCircle } from "react-icons/io";
 import ProductDetails from "./ProductDetails";
 import { BiCategoryAlt } from "react-icons/bi";
 import { SlBadge } from "react-icons/sl";
+import useAuth from "../hooks/useAuth";
+import useAddToCart from "../hooks/useAddToCart";
 
 interface Product {
 	_id: string;
@@ -25,6 +27,8 @@ interface ProductProps {
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isClosing, setIsClosing] = useState(false);
+	const { user } = useAuth();
+	const { addToCart } = useAddToCart();
 
 	const handleOpenModal = () => {
 		setIsModalOpen(true);
@@ -42,6 +46,15 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 
 	const { _id, title, image, price, brand, category, ratings, createdAt } =
 		product;
+
+	const handleAddToCart = (id: string) => {
+		const cartItem = {
+			userEmail: user?.email as string,
+			products: id,
+			quantity: 1,
+		};
+		addToCart(cartItem);
+	};
 
 	return (
 		<div>
@@ -81,7 +94,10 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 				</div>
 				{/* Buttons */}
 				<div className="flex gap-2 justify-between mt-2 w-full">
-					<button className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-300 ease-in-out hover:bg-red-600">
+					<button
+						onClick={() => handleAddToCart(_id)}
+						className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-300 ease-in-out hover:bg-red-600"
+					>
 						<TiShoppingCart />
 						Add to Cart
 					</button>
