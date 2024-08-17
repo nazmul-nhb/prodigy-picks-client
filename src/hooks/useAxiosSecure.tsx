@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from "axios";
 
 const axiosSecure: AxiosInstance = axios.create({
-	baseURL: "http://localhost:4242",
+	baseURL: "https://prodigy-picks-server.vercel.app",
 });
 
 const useAxiosSecure = () => {
