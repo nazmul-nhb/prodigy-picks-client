@@ -18,7 +18,10 @@ const Cart = () => {
 				<title>{user?.displayName}'s Cart - Prodigy Picks</title>
 			</Helmet>
 			<h3 className="text-2xl md:text3xl lg:text-4xl font-bold mb-4 hover:text-blue-600 transition-colors duration-300 text-center">
-				{totalProducts} Items in Cart worth ${totalPrice}
+				{totalProducts} Items ({cartProducts?.length} Products)
+			</h3>
+			<h3 className="text-2xl md:text3xl lg:text-4xl font-bold mb-4 hover:text-blue-600 transition-colors duration-300 text-center">
+				Total Price: ${totalPrice}
 			</h3>
 			<div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-6">
 				{cartProducts?.map((product) => (

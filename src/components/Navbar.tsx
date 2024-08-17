@@ -100,11 +100,11 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav className="max-w-[1920px] flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-14 sticky top-0 bg-navBG bg-opacity-100 z-50 text-prodigy-secondary transition-all duration-1000 h-16">
+		<nav className="max-w-[1920px] flex items-center justify-between gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-14 sticky top-0 bg-navBG bg-opacity-100 z-50 text-prodigy-secondary transition-all duration-1000 h-16">
 			<div className="absolute inset-0 backdrop-filter backdrop-blur-sm -z-10"></div>
 			<div
 				ref={sidebarRef}
-				className="sm:hidden max-[430px]:text-3xl text-5xl cursor-pointer z-50"
+				className="sm:hidden max-[430px]:text-3xl text-4xl cursor-pointer z-50"
 				onClick={() => setOpenNavbar(!openNavbar)}
 			>
 				{openNavbar ? (
@@ -131,7 +131,6 @@ const Navbar = () => {
 				</NavLink>
 			</figure>
 
-			<div className="flex justify-between items-center w-full">
 				{/* Navbar Items/Links/Routes */}
 				<div className="text-sm xl:text-base">
 					<ul
@@ -203,7 +202,6 @@ const Navbar = () => {
 						</div>
 					)}
 				</div>
-			</div>
 		</nav>
 	);
 };

@@ -137,7 +137,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 							<BiCategoryAlt /> {category}
 						</p>
 					</div>
-					<h3 className="text-xl font-bold text-gray-800 group-hover:text-nexus-primary">
+					<h3 className="line-clamp-1 text-xl font-bold text-gray-800 group-hover:text-nexus-primary">
 						{fromCart && <sup>({quantity}x)</sup>}
 						{title}
 					</h3>
