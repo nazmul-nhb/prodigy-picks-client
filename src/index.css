@@ -81,7 +81,7 @@ select::-ms-expand {
 	height: calc(98vh - 80px);
 	overflow-y: auto;
 	max-width: 800px;
-	border-radius: 0.5rem;
+	/* border-radius: 0.5rem; */
 	z-index: 50;
 	animation: zoomIn 0.3s ease-in-out;
 }

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { MdOutlineInfo } from "react-icons/md";
-import { TiShoppingCart } from "react-icons/ti";
-import { AiOutlineClose } from "react-icons/ai"; // Import the close icon
 import moment from "moment";
+import { MdMoreTime, MdOutlineInfo } from "react-icons/md";
+import { TiShoppingCart } from "react-icons/ti";
 import { IoIosCloseCircle } from "react-icons/io";
+import ProductDetails from "./ProductDetails";
+import { BiCategoryAlt } from "react-icons/bi";
+import { SlBadge } from "react-icons/sl";
 
 interface Product {
 	_id: string;
@@ -43,35 +45,42 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 
 	return (
 		<div>
-			<div className="group flex flex-col items-center gap-4 p-2 bg-white border rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl">
+			<div className="group flex flex-col items-center gap-4 p-4 bg-white border rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl">
 				{/* Image */}
-				<div className="w-64 h-64 overflow-hidden rounded-lg">
-					<img
-						src={image}
-						alt={title}
-						className="object-cover w-full h-full transition-transform duration-300 ease-in-out transform group-hover:scale-105"
-					/>
+				<div className="relative">
+					<div className="w-full aspect-square overflow-hidden rounded-lg">
+						<img
+							src={image}
+							alt={title}
+							className="object-cover w-full h-full transition-transform duration-300 ease-in-out transform group-hover:scale-105"
+						/>
+						<div className="flex justify-between w-full text-xl font-bold z-20 absolute bottom-0 px-3 bg-[#294f736c] text-white rounded-b-lg">
+							<div className="absolute inset-0 backdrop-filter backdrop-blur-sm -z-10 rounded-b-lg"></div>
+							<p>${price}</p>
+							<p>⭐ {ratings}</p>
+						</div>
+					</div>
 				</div>
 				{/* Product Info */}
-				<div className="flex flex-col items-center text-center">
-					<h3 className="text-lg font-semibold text-gray-800 group-hover:text-nexus-primary">
+				<div className="flex flex-col gap-2 w-full">
+					<div className="flex justify-between items-center font-semibold">
+						<p className="text-gray-600 flex items-center gap-1">
+							<SlBadge /> {brand}
+						</p>
+						<p className="text-gray-600 flex items-center gap-1">
+							<BiCategoryAlt /> {category}
+						</p>
+					</div>
+					<h3 className="text-xl font-bold text-gray-800 group-hover:text-nexus-primary">
 						{title}
 					</h3>
-					<p className="text-sm text-gray-600">Price: ${price}</p>
-					<p className="text-sm text-gray-600">Brand: {brand}</p>
-					<p className="text-sm text-gray-600">
-						Category: {category}
-					</p>
-					<p className="text-sm text-gray-600">
-						Ratings: ⭐ {ratings}
-					</p>
-					<p className="text-xs text-gray-500">
-						Added on:{" "}
+					<p className="text-sm text-gray-500 flex items-center gap-1">
+						<MdMoreTime />
 						{moment(createdAt).format("MMMM DD, YYYY [at] hh:mm A")}
 					</p>
 				</div>
 				{/* Buttons */}
-				<div className="flex gap-2 mt-4">
+				<div className="flex gap-2 justify-between mt-2 w-full">
 					<button className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-300 ease-in-out hover:bg-red-600">
 						<TiShoppingCart />
 						Add to Cart
@@ -114,26 +123,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 								title="Close"
 							/>
 							{/* Modal Content */}
-							<div className="p-4">
-								<h2 className="text-2xl font-semibold">
-									{title}
-								</h2>
-								<img
-									src={image}
-									alt={title}
-									className="w-full h-auto mt-4 rounded-md"
-								/>
-								<p className="mt-4">Brand: {brand}</p>
-								<p>Category: {category}</p>
-								<p>Price: ${price}</p>
-								<p>Ratings: ⭐ {ratings}</p>
-								<p className="text-xs text-gray-500 mt-2">
-									Added on:{" "}
-									{moment(createdAt).format(
-										"MMMM DD, YYYY [at] hh:mm A"
-									)}
-								</p>
-							</div>
+							<ProductDetails id={_id} />
 						</div>
 					</div>
 				</>

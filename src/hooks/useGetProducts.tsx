@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
+import useAxiosSecure from "./useAxiosSecure";
 
 /**
  * Interface for a product object.
@@ -45,7 +45,7 @@ const useGetProducts = (
 	productsError: unknown;
 	refetchProducts: () => void;
 } => {
-	const axiosPublic = useAxiosPublic();
+	const axiosSecure = useAxiosSecure();
 	const queryString = new URLSearchParams(
 		queryParams as Record<string, string>
 	).toString();
@@ -59,7 +59,7 @@ const useGetProducts = (
 	} = useQuery({
 		queryKey,
 		queryFn: async () => {
-			const res = await axiosPublic.get(`/products?${queryString}`);
+			const res = await axiosSecure.get(`/products?${queryString}`);
 			return res.data;
 		},
 	});

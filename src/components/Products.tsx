@@ -185,6 +185,12 @@ const Products: React.FC = () => {
 						<option value="date_asc">Oldest First</option>
 						<option value="price_asc">Price: Low to High</option>
 						<option value="price_desc">Price: High to Low</option>
+						<option value="ratings_asc">
+							Ratings: Low to High
+						</option>
+						<option value="ratings_desc">
+							Ratings: High to Low
+						</option>
 					</select>
 				</div>
 
