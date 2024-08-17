@@ -67,9 +67,11 @@ const Navbar = () => {
 			{user && (
 				<>
 					<NavLink className={navClasses} to={"cart"}>
-						<p className="text-xs text-red-800">
-							{totalProducts}
-						</p>
+						{totalProducts > 0 && (
+							<p className="text-xs text-red-800">
+								{totalProducts}
+							</p>
+						)}
 						<TiShoppingCart />
 						My Cart
 					</NavLink>
@@ -131,77 +133,77 @@ const Navbar = () => {
 				</NavLink>
 			</figure>
 
-				{/* Navbar Items/Links/Routes */}
-				<div className="text-sm xl:text-base">
-					<ul
-						className={`w-3/5 sm:w-full flex flex-col sm:flex-row justify-start sm:justify-center gap-2 sm:gap-4 text-lg md:text-xl font-semibold duration-500 absolute sm:static shadow-lg shadow-slate-700 sm:shadow-none h-screen sm:h-auto p-4 sm:p-0 ${
-							openNavbar
-								? "md:pl-14 left-0 top-0 bg-navBG flex z-30"
-								: "-left-full top-0"
-						}`}
-					>
-						{navItems}
-					</ul>
-				</div>
+			{/* Navbar Items/Links/Routes */}
+			<div className="text-sm xl:text-base">
+				<ul
+					className={`w-3/5 sm:w-full flex flex-col sm:flex-row justify-start sm:justify-center gap-2 sm:gap-4 text-lg md:text-xl font-semibold duration-500 absolute sm:static shadow-lg shadow-slate-700 sm:shadow-none h-screen sm:h-auto p-4 sm:p-0 ${
+						openNavbar
+							? "md:pl-14 left-0 top-0 bg-navBG flex z-30"
+							: "-left-full top-0"
+					}`}
+				>
+					{navItems}
+				</ul>
+			</div>
 
-				<div className="flex gap-8 items-center">
-					{!user && userLoading ? (
-						"Loading..."
-					) : user ? (
-						<div className="flex items-center gap-2 md:gap-3">
-							<Tooltip anchorSelect=".nameIcon" place="right">
-								{userName}
-							</Tooltip>
-							<div className="relative" ref={dropdownRef}>
-								<img
-									className="nameIcon w-9 md:w-12 h-9 md:h-12 rounded-full border-2 border-prodigy-secondary hover:opacity-70 transition-all duration-1000 cursor-pointer"
-									src={profilePicture}
-									alt={userName}
-									onClick={() => setProfileOpen(!profileOpen)}
-								/>
-								{profileOpen && (
-									<div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-prodigy-primary shadow-[#6897bb] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
-										<NavLink
-											to={"/profile"}
-											onClick={() =>
-												setProfileOpen(!profileOpen)
-											}
-											className={
-												"flex gap-2 items-center text-white"
-											}
-										>
-											<ImProfile />
-											{userName}
-										</NavLink>
-										<button
-											className={
-												"flex gap-2 items-center text-white"
-											}
-											onClick={() => {
-												handleLogout();
-												setProfileOpen(!profileOpen);
-											}}
-										>
-											<GiExitDoor />
-											Logout
-										</button>
-									</div>
-								)}
-							</div>
+			<div className="flex gap-8 items-center">
+				{!user && userLoading ? (
+					"Loading..."
+				) : user ? (
+					<div className="flex items-center gap-2 md:gap-3">
+						<Tooltip anchorSelect=".nameIcon" place="right">
+							{userName}
+						</Tooltip>
+						<div className="relative" ref={dropdownRef}>
+							<img
+								className="nameIcon w-9 md:w-12 h-9 md:h-12 rounded-full border-2 border-prodigy-secondary hover:opacity-70 transition-all duration-1000 cursor-pointer"
+								src={profilePicture}
+								alt={userName}
+								onClick={() => setProfileOpen(!profileOpen)}
+							/>
+							{profileOpen && (
+								<div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-prodigy-primary shadow-[#6897bb] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
+									<NavLink
+										to={"/profile"}
+										onClick={() =>
+											setProfileOpen(!profileOpen)
+										}
+										className={
+											"flex gap-2 items-center text-white"
+										}
+									>
+										<ImProfile />
+										{userName}
+									</NavLink>
+									<button
+										className={
+											"flex gap-2 items-center text-white"
+										}
+										onClick={() => {
+											handleLogout();
+											setProfileOpen(!profileOpen);
+										}}
+									>
+										<GiExitDoor />
+										Logout
+									</button>
+								</div>
+							)}
 						</div>
-					) : (
-						<div className="font-jokeyOneSans flex items-center gap-1 md:gap-3 text-lg md:text-xl font-medium md:pt-0 pt-1">
-							<NavLink to={"/login"} className={navClasses}>
-								<FaUserLock />
-								Login
-							</NavLink>
-							<NavLink to={"/register"} className={navClasses}>
-								<MdAppRegistration />
-								Register
-							</NavLink>
-						</div>
-					)}
-				</div>
+					</div>
+				) : (
+					<div className="font-jokeyOneSans flex items-center gap-1 md:gap-3 text-lg md:text-xl font-medium md:pt-0 pt-1">
+						<NavLink to={"/login"} className={navClasses}>
+							<FaUserLock />
+							Login
+						</NavLink>
+						<NavLink to={"/register"} className={navClasses}>
+							<MdAppRegistration />
+							Register
+						</NavLink>
+					</div>
+				)}
+			</div>
 		</nav>
 	);
 };
