@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import Register from "../pages/Register";
 import Cart from "../pages/Cart";
+import About from "../pages/About";
 
 // define route object type
 const routes: RouteObject[] = [
@@ -23,7 +24,16 @@ const routes: RouteObject[] = [
 			},
 			{
 				path: "/cart",
-				element: <Cart />,
+				element: (
+					<PrivateRoute>
+						{" "}
+						<Cart />{" "}
+					</PrivateRoute>
+				),
+			},
+			{
+				path: "/about",
+				element: <About />,
 			},
 			{
 				path: "/login",

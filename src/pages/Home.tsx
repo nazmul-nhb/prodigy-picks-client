@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import Products from "../components/Products";
 
 const Home = () => {
 	return (
 		<section className="flex justify-center items-center my-8 mx-auto px-8">
-            <Products/>
+			<Helmet>
+				<title>Prodigy Picks : : Eco Essentials</title>
+			</Helmet>
+			<Products />
 		</section>
 	);
 };
