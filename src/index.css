@@ -15,36 +15,113 @@
 	border-color: transparent transparent #6897bb transparent;
 }
 
-html{
+html {
 	scroll-behavior: smooth;
 }
 
 /* hide increase and decrease arrows in number input fields */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    margin: 0;
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	margin: 0;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
 }
 
-input[type=number] {
-    appearance: textfield;
-    -moz-appearance: textfield;
-    -webkit-appearance: textfield;
+input[type="number"] {
+	appearance: textfield;
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
 }
 
 /* modify arrow for the select fields */
 select.redesign {
-    /* Adjust the value as needed */
-    background: url('/src/assets/chevronDown.png') no-repeat right 6px center;
-    background-size: 16px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+	/* Adjust the value as needed */
+	background: url("/src/assets/chevronDown.png") no-repeat right 6px center;
+	background-size: 16px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 /* remove the default arrow in IE */
 select::-ms-expand {
-    display: none;
+	display: none;
+}
+
+/* Blur background when modal is open */
+.modal-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(5px);
+	z-index: 49;
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* Modal Container */
+.modal-content-container {
+	position: fixed;
+	top: 80px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: 80%;
+	height: calc(98vh - 80px);
+	overflow-y: auto;
+	max-width: 800px;
+	border-radius: 0.5rem;
+	z-index: 50;
+	animation: zoomIn 0.3s ease-in-out;
+}
+
+@keyframes zoomIn {
+	from {
+		transform: scale(0.5) translate(-50%, -50%);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1) translate(-50%, -50%);
+		opacity: 1;
+	}
+}
+
+.modal-content-close {
+	animation: zoomOut 0.3s ease-in-out;
+}
+
+@keyframes zoomOut {
+	from {
+		transform: scale(1) translate(-50%, -50%);
+		opacity: 1;
+	}
+	to {
+		transform: scale(0.5) translate(-50%, -50%);
+		opacity: 0;
+	}
+}
+
+/* Modal Content */
+.modal-content {
+	background: white;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+	position: relative;
+}
+
+/* Disable scrolling when modal is open */
+.modal-open {
+	overflow: hidden;
 }
