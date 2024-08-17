@@ -8,6 +8,7 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { SlBadge } from "react-icons/sl";
 import useAuth from "../hooks/useAuth";
 import useAddToCart from "../hooks/useAddToCart";
+import useGetCart from "../hooks/useGetCart";
 
 interface Product {
 	_id: string;
@@ -28,6 +29,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isClosing, setIsClosing] = useState(false);
 	const { user } = useAuth();
+	const { refetchCart } = useGetCart();
 	const { addToCart } = useAddToCart();
 
 	const handleOpenModal = () => {
@@ -53,7 +55,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 			products: id,
 			quantity: 1,
 		};
-		addToCart(cartItem);
+		addToCart(cartItem, refetchCart);
 	};
 
 	return (

@@ -9,6 +9,7 @@ import { ImProfile } from "react-icons/im";
 import { FaUserLock } from "react-icons/fa6";
 import { GiExitDoor } from "react-icons/gi";
 import { TiInfoLargeOutline, TiShoppingCart } from "react-icons/ti";
+import useGetCart from "../hooks/useGetCart";
 // import useUserRole from "../hooks/useUserRole";
 // import logo from "../assets/logo.png";
 
@@ -20,6 +21,7 @@ const Navbar = () => {
 	const [profileOpen, setProfileOpen] = useState<boolean>(false);
 	const sidebarRef = useRef<HTMLDivElement>(null);
 	const dropdownRef = useRef<HTMLDivElement>(null);
+	const { totalProducts } = useGetCart();
 	// const { role } = useUserRole();
 
 	useEffect(() => {
@@ -57,14 +59,17 @@ const Navbar = () => {
 
 	const navClasses = ({ isActive }: { isActive: boolean }) =>
 		isActive
-			? "text-prodigy-primary font-bold border-b-2 border-prodigy-primary flex items-center gap-0.5"
-			: "text-prodigy-secondary hover:text-prodigy-primary font-semibold flex items-center gap-0.5";
+			? "relative text-prodigy-primary font-bold border-b-2 border-prodigy-primary flex items-center gap-0.5"
+			: "relative text-prodigy-secondary hover:text-prodigy-primary font-semibold flex items-center gap-0.5";
 
 	const navItems = (
 		<>
 			{user && (
 				<>
 					<NavLink className={navClasses} to={"cart"}>
+						<sup className="text-xs text-red-800 absolute left-1">
+							{totalProducts}
+						</sup>
 						<TiShoppingCart />
 						My Cart
 					</NavLink>

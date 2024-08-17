@@ -29,7 +29,7 @@ const useAddToCart = () => {
 	 * @param cartItem - The item to add to the cart.
 	 * @param refetch - An optional refetch function from useQuery.
 	 */
-	const addToCart = (cartItem: CartItem, refetch?: () => Promise<void>) => {
+	const addToCart = (cartItem: CartItem, refetch?: () => void) => {
 		setCartLoading(true);
 		axiosSecure
 			.post("/carts", cartItem)
