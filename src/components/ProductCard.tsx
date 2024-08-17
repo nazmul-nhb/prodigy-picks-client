@@ -105,8 +105,8 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
 					<div
 						className={
 							isClosing
-								? "modal-content-container zoom-out scrollbar-custom scrollbar-thin"
-								: "modal-content-container scrollbar-custom scrollbar-thin"
+								? "modal-content-container md:w-4/5 w-[96%] zoom-out scrollbar-custom scrollbar-thin"
+								: "modal-content-container md:w-4/5 w-[96%] scrollbar-custom scrollbar-thin"
 						}
 					>
 						<div

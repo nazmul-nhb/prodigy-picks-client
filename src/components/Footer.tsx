@@ -17,7 +17,7 @@ const Footer = () => {
 
 					{/* Footer Links */}
 					<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
-						<div className="flex flex-col">
+						<div className="flex flex-col items-center md:items-start">
 							<h3 className="text-lg font-semibold mb-2 flex items-center">
 								<MdInfo className="mr-2" />
 								Company
@@ -44,7 +44,7 @@ const Footer = () => {
 								Contact
 							</a>
 						</div>
-						<div className="flex flex-col">
+						<div className="flex flex-col items-center md:items-start">
 							<h3 className="text-lg font-semibold mb-2 flex items-center">
 								<MdSupport className="mr-2" />
 								Customer Service
@@ -71,7 +71,7 @@ const Footer = () => {
 								Shipping
 							</a>
 						</div>
-						<div className="flex flex-col">
+						<div className="flex flex-col items-center md:items-start">
 							<h3 className="text-lg font-semibold mb-2 flex items-center">
 								<MdInfo className="mr-2" />
 								Follow Us
