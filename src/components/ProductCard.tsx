@@ -111,7 +111,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 	};
 
 	return (
-		<div>
+		<div title={title}>
 			<div className="group flex flex-col items-center gap-4 p-4 bg-white border rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl">
 				{/* Image */}
 				<div className="relative">
@@ -140,7 +140,10 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 							<BiCategoryAlt /> {category}
 						</p>
 					</div>
-					<h3 className="line-clamp-1 text-xl font-bold text-gray-800 group-hover:text-nexus-primary">
+					<h3
+						title={title}
+						className="line-clamp-1 text-xl font-bold text-gray-800 group-hover:text-nexus-primary"
+					>
 						{fromCart && <sup>({quantity}x)</sup>}
 						{title}
 					</h3>
