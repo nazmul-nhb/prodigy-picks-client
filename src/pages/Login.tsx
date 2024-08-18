@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import { ButtonLoader } from "../components/Loaders";
 
 interface ErrorObject extends Error {
 	message: string;
@@ -176,7 +177,7 @@ const Login = () => {
 						type="submit"
 						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700 transition-all duration-500"
 					>
-						{userLoading ? "Loading..." : "Login!"}
+						{userLoading ? ButtonLoader : "Login!"}
 					</button>
 					<p className="text-center text-sm md:text-base font-medium">
 						New to this site?{" "}

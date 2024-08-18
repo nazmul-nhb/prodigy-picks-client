@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import toast from "react-hot-toast";
 import { FaFilter, FaSearch, FaSortAmountDown } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
+import { MainLoader, SearchLoader } from "./Loaders";
 
 const Products: React.FC = () => {
 	const [searchText, setSearchText] = useState<string>("");
@@ -226,24 +227,41 @@ const Products: React.FC = () => {
 
 			{/* Show Product Cards */}
 			<div className="">
-				{isProductsLoading ? (
-					"Loading..."
+				{!searchText && isProductsLoading ? (
+					MainLoader
+				) : searchText && isProductsLoading ? (
+					SearchLoader
 				) : productCount === 0 ? (
-					"No products found."
+					<div className="flex items-center justify-center mb-6 text-2xl md:text-3xl font-bold font-kreonSerif text-prodigy-secondary">
+						No Products Found!
+					</div>
 				) : (
 					<>
+						{/* Showing Text for Sort Options */}
+						{sortBy && productCount > 0 && (
+							<div className="flex items-center justify-center mb-6 text-2xl md:text-3xl font-bold font-kreonSerif text-prodigy-secondary">
+								{`Showing ${
+									document.querySelector(
+										"#sort option:checked"
+									)?.textContent
+								}`}
+							</div>
+						)}
+						{/* Showing Text for Search & Filters */}
 						{(searchText.trim() ||
 							minPrice ||
 							maxPrice ||
 							selectedBrand ||
 							selectedCategory) &&
 							productCount > 0 && (
-								<div className="flex items-center justify-center">
+								<div className="flex items-center justify-center mb-6 text-2xl md:text-3xl font-bold font-kreonSerif text-prodigy-secondary">
 									{`${productCount} ${
 										productCount > 1 ? "Matches" : "Match"
 									} Found!`}
 								</div>
 							)}
+
+						{/* Main Grid for Showing Cards */}
 						<div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 							{products?.map((product) => (
 								<ProductCard

@@ -10,6 +10,7 @@ import { FaUserLock } from "react-icons/fa6";
 import { GiExitDoor } from "react-icons/gi";
 import { TiInfoLargeOutline, TiShoppingCart } from "react-icons/ti";
 import useGetCart from "../hooks/useGetCart";
+import { ProfileLoader } from "./Loaders";
 // import useUserRole from "../hooks/useUserRole";
 // import logo from "../assets/logo.png";
 
@@ -148,7 +149,7 @@ const Navbar = () => {
 
 			<div className="flex gap-8 items-center">
 				{!user && userLoading ? (
-					"Loading..."
+					ProfileLoader
 				) : user ? (
 					<div className="flex items-center gap-2 md:gap-3">
 						<Tooltip anchorSelect=".nameIcon" place="right">

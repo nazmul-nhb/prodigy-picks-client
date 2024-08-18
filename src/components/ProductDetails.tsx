@@ -6,6 +6,7 @@ import { MdStar } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
 import { SlBadge } from "react-icons/sl";
 import { BiCategoryAlt } from "react-icons/bi";
+import { MainLoader } from "./Loaders";
 
 const ProductDetails = ({ id }: { id: string }) => {
 	const axiosSecure = useAxiosSecure();
@@ -30,7 +31,7 @@ const ProductDetails = ({ id }: { id: string }) => {
 		createdAt,
 	} = product;
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) return MainLoader;
 
 	return (
 		<div className="col-span-5 flex flex-col gap-4 border px-3 py-4">

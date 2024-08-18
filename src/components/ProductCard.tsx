@@ -13,6 +13,7 @@ import { HiOutlineTrash } from "react-icons/hi2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { RiStarSFill } from "react-icons/ri";
 
 interface Product {
 	_id: string;
@@ -123,7 +124,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 						<div className="flex justify-between w-full text-xl font-bold z-20 absolute bottom-0 px-3 bg-[#294f736c] text-white rounded-b-lg">
 							<div className="absolute inset-0 backdrop-filter backdrop-blur-sm -z-10 rounded-b-lg"></div>
 							<p>${price}</p>
-							<p>⭐ {ratings}</p>
+							<p className="flex items-center"><RiStarSFill /> {ratings}</p>
 						</div>
 					</div>
 				</div>

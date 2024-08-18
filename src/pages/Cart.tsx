@@ -2,10 +2,12 @@ import { Helmet } from "react-helmet-async";
 import ProductCard from "../components/ProductCard";
 import useGetCart from "../hooks/useGetCart";
 import useAuth from "../hooks/useAuth";
+import { MainLoader } from "../components/Loaders";
 
 const Cart = () => {
 	const { user } = useAuth();
-	const { cartItems, totalPrice, totalProducts } = useGetCart();
+	const { cartItems, totalPrice, totalProducts, isCartLoading } =
+		useGetCart();
 
 	const cartProducts = cartItems.map((cartItem) => {
 		const { _id, products, quantity } = cartItem;
@@ -23,15 +25,19 @@ const Cart = () => {
 			<h3 className="text-2xl md:text-3xl font-bold mb-4 hover:text-blue-600 transition-colors duration-300 text-center">
 				Total Price: ${totalPrice}
 			</h3>
-			<div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-6">
-				{cartProducts?.map((product) => (
-					<ProductCard
-						key={product._id}
-						product={product}
-						fromCart={true}
-					/>
-				))}
-			</div>
+			{isCartLoading ? (
+				MainLoader
+			) : (
+				<div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-6">
+					{cartProducts?.map((product) => (
+						<ProductCard
+							key={product._id}
+							product={product}
+							fromCart={true}
+						/>
+					))}
+				</div>
+			)}
 		</section>
 	);
 };
