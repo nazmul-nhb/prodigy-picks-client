@@ -1,12 +1,13 @@
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { MdInfo, MdSupport } from "react-icons/md";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import logo from "../assets/prodigy.png";
 
 const Footer = () => {
 	return (
-		<footer className="bg-prodigy-secondary text-white py-8 max-w-[1920px] mx-auto">
+		<footer className="bg-prodigy-secondary text-white pb-8 pt-10 max-w-[1920px] mx-auto">
 			<div className="container mx-auto px-4">
-				<div className="flex flex-col items-center md:flex-row md:justify-between">
+				<div className="flex flex-col items-center md:flex-row md:justify-between relative">
 					{/* Footer Title and Subtitle */}
 					<div className="mb-8 md:mb-0 flex flex-col items-center md:items-start">
 						<h2 className="text-2xl font-bold mb-2">
@@ -14,7 +15,14 @@ const Footer = () => {
 						</h2>
 						<p className="text-lg font-semibold">Eco Essentials</p>
 					</div>
-
+					{/* Logo */}
+					<figure className="sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2 mb-8">
+						<img
+							className="w-28 md:w-32"
+							src={logo}
+							alt="Prodigy Picks"
+						/>
+					</figure>
 					{/* Footer Links */}
 					<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
 						<div className="flex flex-col items-center md:items-start">

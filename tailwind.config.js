@@ -10,7 +10,7 @@ export default {
         'prodigy-primary': '#6897bb',
         'prodigy-secondary': '#31404b',
         'prodigyBG': '#b6d1e488',
-        'navBG': '#b6d1e4F2'
+        'navBG': '#b6d1e4c2'
       },
       fontFamily: {
         kreonSerif: '"Kreon", serif;',

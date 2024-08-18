@@ -11,8 +11,8 @@ import { GiExitDoor } from "react-icons/gi";
 import { TiInfoLargeOutline, TiShoppingCart } from "react-icons/ti";
 import useGetCart from "../hooks/useGetCart";
 import { ProfileLoader } from "./Loaders";
+import logo from "../assets/prodigy.png";
 // import useUserRole from "../hooks/useUserRole";
-// import logo from "../assets/logo.png";
 
 const Navbar = () => {
 	const { user, userLoading, logOut } = useAuth();
@@ -119,11 +119,11 @@ const Navbar = () => {
 
 			{/* Site Logo */}
 			<figure className="flex items-center gap-2 font-kreonSerif">
-				{/* <img
-					className="w-9 md:w-12 h-7 md:h-10"
+				<img
+					className="w-9 md:w-11 aspect-square"
 					src={logo}
 					alt="logo"
-				/> */}
+				/>
 
 				<NavLink
 					className="transition-all duration-500 text-2xl font-semibold text-prodigy-secondary flex items-center gap-1"
@@ -139,7 +139,7 @@ const Navbar = () => {
 				<ul
 					className={`w-3/5 sm:w-full flex flex-col sm:flex-row justify-start sm:justify-center gap-2 sm:gap-4 text-lg md:text-xl font-semibold duration-500 absolute sm:static shadow-lg shadow-slate-700 sm:shadow-none h-screen sm:h-auto p-4 sm:p-0 ${
 						openNavbar
-							? "md:pl-14 left-0 top-0 bg-navBG flex z-30"
+							? "md:pl-14 left-0 top-0 bg-navBG backdrop-blur-sm flex z-30"
 							: "-left-full top-0"
 					}`}
 				>
