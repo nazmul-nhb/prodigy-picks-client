@@ -12,6 +12,10 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
+interface ErrorObject extends Error {
+	message: string;
+}
+
 const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const { user, userLoading, loginWithEmail } = useAuth();
@@ -57,7 +61,7 @@ const Login = () => {
 				saveUser(userInfo);
 				navigate(from, { replace: true });
 			})
-			.catch((error) => {
+			.catch((error: ErrorObject) => {
 				console.error("Login Error: ", error);
 				if (
 					error.message ===

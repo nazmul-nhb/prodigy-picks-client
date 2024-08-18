@@ -10,6 +10,10 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useSaveUser from "../hooks/useSaveUser";
 
+interface ErrorObject extends Error {
+	message: string;
+}
+
 const SocialLogin = () => {
 	const { googleLogin, facebookLogin } = useAuth();
 	const navigate: NavigateFunction = useNavigate();
@@ -29,7 +33,7 @@ const SocialLogin = () => {
 				saveUser(userInfo);
 				navigate(from, { replace: true });
 			})
-			.catch((error) => {
+			.catch((error: ErrorObject) => {
 				console.error("Login Error: ", error);
 				if (
 					error.message ===
@@ -84,7 +88,7 @@ const SocialLogin = () => {
 				saveUser(userInfo);
 				navigate(from, { replace: true });
 			})
-			.catch((error) => {
+			.catch((error: ErrorObject) => {
 				console.error("Login Error: ", error);
 				if (
 					error.message ===

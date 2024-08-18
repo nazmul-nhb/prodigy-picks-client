@@ -113,7 +113,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 						.post("/auth", userInfo)
 						.then((res) => {
 							if (res.data?.token) {
-								// console.log(res.data.token);
 								localStorage.setItem(
 									"prodigy-token",
 									res.data.token
@@ -124,7 +123,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 						.catch((error) => {
 							console.error(error);
 							setUserLoading(false);
-						});
+						})
+						.finally(() => setUserLoading(false));
 				} else {
 					// remove token if the token stored in the localStorage
 					localStorage.removeItem("prodigy-token");
