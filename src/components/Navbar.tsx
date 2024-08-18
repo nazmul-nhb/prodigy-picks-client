@@ -113,7 +113,7 @@ const Navbar = () => {
 
 			{/* Site <Logo & Title */}
 			<NavLink
-				className="ml-10 sm:ml-0 transition-all duration-500 text-2xl font-semibold text-prodigy-secondary flex items-center gap-1"
+				className="ml-8 sm:ml-0 transition-all duration-500 text-2xl font-semibold text-prodigy-secondary flex items-center gap-1"
 				to={"/"}
 			>
 				{/* Site Logo */}

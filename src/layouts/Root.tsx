@@ -11,7 +11,7 @@ const Root = () => {
 			</main>
 			<Footer />
 		</>
-	);
+	);v
 };
 
 export default Root;
