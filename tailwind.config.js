@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'prodigy-primary': '#6897bb',
+        'prodigy-primary': '#5780a1',
         'prodigy-secondary': '#31404b',
         'prodigyBG': '#b6d1e488',
         'navBG': '#b6d1e4c2'

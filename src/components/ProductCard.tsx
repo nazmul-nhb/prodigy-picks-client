@@ -124,7 +124,9 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 						<div className="flex justify-between w-full text-xl font-bold z-20 absolute bottom-0 px-3 bg-[#294f736c] text-white rounded-b-lg">
 							<div className="absolute inset-0 backdrop-filter backdrop-blur-sm -z-10 rounded-b-lg"></div>
 							<p>${price}</p>
-							<p className="flex items-center"><RiStarSFill /> {ratings}</p>
+							<p className="flex items-center">
+								<RiStarSFill /> {ratings}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -154,7 +156,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 							onClick={() =>
 								handleRemoveFromCart(cartId as string, title)
 							}
-							className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-300 ease-in-out hover:bg-red-600"
+							className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-500 ease-in-out hover:bg-red-700 font-semibold"
 						>
 							<HiOutlineTrash />
 							Remove from Cart
@@ -162,7 +164,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 					) : (
 						<button
 							onClick={() => handleAddToCart(_id)}
-							className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-300 ease-in-out hover:bg-red-600"
+							className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-red-500 rounded-lg transition duration-500 ease-in-out hover:bg-red-700 font-semibold"
 						>
 							<TiShoppingCart />
 							Add to Cart
@@ -170,7 +172,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 					)}
 					<button
 						onClick={handleOpenModal}
-						className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-blue-500 rounded-lg transition duration-300 ease-in-out hover:bg-blue-600"
+						className="flex items-center gap-1 px-4 py-2 text-sm text-white bg-blue-500 rounded-lg transition duration-500 ease-in-out hover:bg-blue-700 font-semibold"
 					>
 						<MdOutlineInfo />
 						Details

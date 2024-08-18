@@ -80,7 +80,7 @@ const About: React.FC = () => {
 				us at
 				<a
 					href="mailto:nazmulnhb@gmail.com"
-					className="text-blue-500 hover:underline transition-colors duration-300 ml-2"
+					className="text-blue-500 hover:border-b hover:border-prodigy-primary hover:text-prodigy-primary transition-all duration-300 ml-2"
 				>
 					nazmulnhb@gmail.com
 				</a>

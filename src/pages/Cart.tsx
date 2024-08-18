@@ -15,7 +15,7 @@ const Cart = () => {
 	});
 
 	return (
-		<section className="py-8 mx-auto px-8">
+		<section className="py-8 mx-auto px-4">
 			<Helmet>
 				<title>{user?.displayName}'s Cart - Prodigy Picks</title>
 			</Helmet>
