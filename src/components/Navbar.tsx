@@ -123,8 +123,10 @@ const Navbar = () => {
 						src={logo}
 						alt="Prodigy Picks Logo"
 					/>
-					Prodigy
-					<span className="text-prodigy-primary">Picks</span>
+					<span className="hidden sm:flex items-center gap-2">
+						Prodigy
+						<span className="text-prodigy-primary">Picks</span>
+					</span>
 				</figure>
 			</NavLink>
 
