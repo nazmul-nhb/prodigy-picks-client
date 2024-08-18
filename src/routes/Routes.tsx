@@ -6,12 +6,14 @@ import PrivateRoute from "./PrivateRoute";
 import Register from "../pages/Register";
 import Cart from "../pages/Cart";
 import About from "../pages/About";
+import ErrorPage from "../pages/ErrorPage";
 
 // define route object type
 const routes: RouteObject[] = [
 	{
 		path: "/",
 		element: <Root />,
+		errorElement:<ErrorPage/>,
 		children: [
 			{
 				index: true,

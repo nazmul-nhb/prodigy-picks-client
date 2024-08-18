@@ -111,7 +111,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 	};
 
 	return (
-		<div title={title}>
+		<div className="w-full">
 			<div className="group flex flex-col items-center gap-4 p-4 bg-white border rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl">
 				{/* Image */}
 				<div className="relative">

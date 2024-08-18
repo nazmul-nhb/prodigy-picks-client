@@ -87,7 +87,7 @@ const Products: React.FC = () => {
 	};
 
 	return (
-		<section>
+		<section className="w-full overflow-x-hidden mx-auto">
 			{/* <SectionHeader heading={`Total ${productCount} Products`} /> */}
 
 			{/* Filter & Search Options */}
