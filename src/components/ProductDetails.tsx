@@ -44,7 +44,7 @@ const ProductDetails = ({ id }: { id: string }) => {
 				<img
 					src={image}
 					alt={title}
-					className="md:w-1/2 w-full object-cover rounded-md border p-1"
+					className="md:w-1/2 w-full object-cover border p-1"
 				/>
 				<div className="md:w-1/2 w-full flex flex-col gap-4 justify-between items-start">
 					{/* Product Details */}
