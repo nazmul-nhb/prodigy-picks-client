@@ -4,7 +4,7 @@ import search from "../assets/search.svg";
 const ProfileLoader = (
 	<div className="flex flex-col items-center justify-center">
 		<img
-			className="w-9 md:w-12 h-9 md:h-12"
+			className="w-9 md:w-12 aspect-square"
 			src={ripple}
 			alt="Loading..."
 		/>
@@ -19,13 +19,13 @@ const ButtonLoader = (
 
 const MainLoader = (
 	<div className="flex flex-col items-center justify-center">
-		<img src={ripple} alt="Loading..." />
+		<img className="w-36 lg:w-48 aspect-square" src={ripple} alt="Loading..." />
 	</div>
 );
 
 const SearchLoader = (
 	<div className="flex flex-col items-center justify-center">
-		<img src={search} alt="Searching..." />
+		<img className="w-36 lg:w-48 aspect-square" src={search} alt="Searching..." />
 	</div>
 );
 
