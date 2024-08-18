@@ -142,7 +142,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, fromCart }) => {
 					</div>
 					<h3
 						title={title}
-						className="line-clamp-1 text-xl font-bold text-gray-800 group-hover:text-nexus-primary"
+						className="line-clamp-1 text-xl font-bold text-gray-800 group-hover:text-prodigy-primary"
 					>
 						{fromCart && <sup>({quantity}x)</sup>}
 						{title}
