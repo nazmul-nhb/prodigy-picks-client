@@ -159,7 +159,7 @@ const Navbar = () => {
 							{profileOpen && (
 								<div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-prodigy-primary shadow-[#6897bb] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
 									<NavLink
-										to={"/profile"}
+										to={"/cart"}
 										onClick={() =>
 											setProfileOpen(!profileOpen)
 										}
