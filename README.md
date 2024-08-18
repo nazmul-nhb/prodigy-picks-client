@@ -1,4 +1,4 @@
-# Prodigy Picks : Eco Essentials
+# Prodigy Picks : : Eco Essentials
 
 ## [Live Link](https://prodigy-picks-nhb.vercel.app)
 
@@ -15,7 +15,7 @@ The Prodigy Picks client is a single-page application (SPA) built with React.js 
 - **Authentication**: Google and email/password authentication via Firebase.
 - **Cart Operations**: Add and remove products from the cart.
 
-## Installation
+## Run the Project Locally
 
 ### Prerequisites
 
@@ -89,7 +89,7 @@ The Prodigy Picks client is a single-page application (SPA) built with React.js 
 
 ### Sorting
 
-- Users can sort products by price and date added.
+- Users can sort products by price, date added and ratings.
 - Sorting options include:
   - Price: Low to High, High to Low
   - Date Added: Newest first
