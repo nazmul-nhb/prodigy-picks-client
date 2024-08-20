@@ -226,7 +226,7 @@ const Products: React.FC = () => {
 			</div>
 
 			{/* Show Product Cards */}
-			<div className="">
+			<div>
 				{!searchText && isProductsLoading ? (
 					MainLoader
 				) : searchText && isProductsLoading ? (
@@ -276,14 +276,15 @@ const Products: React.FC = () => {
 
 			{/* Pagination Logic & Styles */}
 			{totalPages > 0 && (
-				<div className="flex flex-col gap-4 justify-center items-center font-semibold mt-8 lg:mt-16">
+				<div className="flex flex-col gap-4 justify-center items-center font-semibold mt-8 lg:mt-16 pb-2 sm:text-base text-sm">
 					<p className="text-prodigy-primary">
 						Page: {currentPage} of {totalPages}
 					</p>
-					<div className="flex gap-3">
+					{/* Pagination Controllers */}
+					<div className="flex justify-center gap-2 overflow-auto w-full scrollbar-custom scrollbar-thin">
 						{/* Previous Button */}
 						<button
-							className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:cursor-not-allowed text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
+							className="px-1 sm:px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:cursor-not-allowed text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
 							disabled={currentPage === 1}
 							onClick={handlePreviousPage}
 						>
@@ -293,7 +294,7 @@ const Products: React.FC = () => {
 						{/* Numbered Buttons */}
 						{pages.map((page) => (
 							<button
-								className={`px-3 border ${
+								className={`px-1 sm:px-3 border ${
 									currentPage === page + 1
 										? "bg-prodigy-primary border-prodigy-primary text-white hover:bg-transparent hover:text-prodigy-primary"
 										: "text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
@@ -307,7 +308,7 @@ const Products: React.FC = () => {
 
 						{/* Next Button */}
 						<button
-							className="px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:cursor-not-allowed text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
+							className="px-1 sm:px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:cursor-not-allowed text-prodigy-primary border-prodigy-primary hover:bg-prodigy-primary hover:text-white"
 							disabled={
 								currentPage === totalPages || totalPages === 0
 							}
@@ -317,7 +318,7 @@ const Products: React.FC = () => {
 						</button>
 					</div>
 					<select
-						className="border px-2 py-1 focus:text-prodigy-primary outline-prodigy-primary border-prodigy-primary text-prodigy-primary bg-transparent focus:border-2 mx-auto mb-12"
+						className="border px-1 sm:px-2 sm:py-1 focus:text-prodigy-primary outline-prodigy-primary border-prodigy-primary text-prodigy-primary bg-transparent focus:border-2 mx-auto mb-12"
 						value={itemsPerPage}
 						onChange={handleItemsPerPage}
 						name="products"
