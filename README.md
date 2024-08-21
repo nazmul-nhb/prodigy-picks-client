@@ -27,7 +27,7 @@ The Prodigy Picks client is a single-page application (SPA) built with React.js 
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/nazmul-nhb/prodigy-picks-client
+    git clone https://github.com/nazmul-nhb/prodigy-picks-client.git
     ```
 
 2. **Navigate to the project directory**:
@@ -48,7 +48,7 @@ The Prodigy Picks client is a single-page application (SPA) built with React.js 
     yarn install
     ```
 
-4. **Create a `.env` file** in the root directory of the project and add your environment variables.
+4. **Create a `.env.local` file** in the root directory of the project and add your environment variables.
 
     ```env
     VITE_FIREBASE_API_KEY=your-firebase-api-key
@@ -93,13 +93,13 @@ The Prodigy Picks client is a single-page application (SPA) built with React.js 
 - Sorting options include:
   - Price: Low to High, High to Low
   - Date Added: Newest first
-  - Ratings: Low to High, High to Low (Extra)
+  - Ratings: Low to High, High to Low
 
 ### Authentication
 
 - Integrated Google Authentication using Firebase.
 - Implemented Email and Password Authentication using Firebase.
 
-### Cart Operations (Extra Feature)
+### Cart Operations
 
 - Users can add and remove products from their cart.
